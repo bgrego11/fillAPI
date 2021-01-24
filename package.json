@@ -1,0 +1,25 @@
+{
+  "name": "fillapi",
+  "version": "1.0.0",
+  "description": "for christ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bgrego11/fillAPI.git"
+  },
+  "author": "god",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bgrego11/fillAPI/issues"
+  },
+  "homepage": "https://github.com/bgrego11/fillAPI#readme",
+  "dependencies": {
+    "mongoose": "^5.11.13",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.4.0"
+  }
+}
