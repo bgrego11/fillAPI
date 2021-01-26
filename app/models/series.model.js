@@ -11,8 +11,7 @@ module.exports = (sequelize, Sequelize) => {
           type: Sequelize.STRING
         },
         img: {
-            type: Sequelize.STRING,
-            field: 'title' 
+            type: Sequelize.STRING, 
           },
         likes: {
         type: Sequelize.INTEGER,

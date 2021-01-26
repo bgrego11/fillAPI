@@ -1,8 +1,8 @@
 const db = require("../models");
-const Series = db.series;
+const Story = db.story;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Series
+// Create and Save a new Story
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.title) {
@@ -12,112 +12,114 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Series
-  const series = {
+  // Create a Story
+  const story = {
     title: req.body.title,
     description: req.body.description,
-    img: req.body.img,
-    likes: req.body.likes
+    audio_length: req.body.audio_length,
+    audio_url: req.body.audio_url,
+    artwork: req.body.artwork,
+    series_id: req.body.series_id
   };
 
-  // Save Series in the database
-  Series.create(series)
+  // Save Story in the database
+  Story.create(story)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Series."
+          err.message || "Some error occurred while creating the Story."
       });
     });
 };
 
 
-// // Retrieve all Seriess from the database.
+// // Retrieve all Storys from the database.
 exports.findAll = (req, res) => {
     // const title = req.query.title;
     // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   
-    Series.findAll()
+    Story.findAll()
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving Seriess."
+            err.message || "Some error occurred while retrieving Storys."
         });
       });
   };
 
-// // Find a single Series with an id
+// // Find a single Story with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Series.findByPk(id)
+    Story.findByPk(id)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Series with id=" + id
+          message: "Error retrieving Story with id=" + id
         });
       });
   };
 
-// // Update a Series by the id in the request
+// // Update a Story by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
   
-    Series.update(req.body, {
+    Story.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Series was updated successfully."
+            message: "Story was updated successfully."
           });
         } else {
           res.send({
-            message: `Cannot update Series with id=${id}. Maybe Series was not found or req.body is empty!`
+            message: `Cannot update Story with id=${id}. Maybe Story was not found or req.body is empty!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Series with id=" + id
+          message: "Error updating Story with id=" + id
         });
       });
   };
 
-// // Delete a Series with the specified id in the request
+// // Delete a Story with the specified id in the request
 
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Series.destroy({
+    Story.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Series was deleted successfully!"
+            message: "Story was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Series with id=${id}. Maybe Series was not found!`
+            message: `Cannot delete Story with id=${id}. Maybe Story was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Series with id=" + id
+          message: "Could not delete Story with id=" + id
         });
       });
   };
 
-// // Find all published Seriess
+// // Find all published Storys
 // exports.findAllPublished = (req, res) => {
   
 // };
