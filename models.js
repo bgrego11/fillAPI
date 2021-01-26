@@ -1,7 +1,5 @@
 
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('mysql://t49gbj6rrj793tsj:qpxbrvda1yaw0fhi@z5zm8hebixwywy9d.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/oaenv6t14vkzhj6k');
+module.exports = (sequelize, Sequelize) => {
 
 
 const Series = sequelize.define('series', {
@@ -23,27 +21,12 @@ const Series = sequelize.define('series', {
     freezeTableName: true // Model tableName will be the same as the model name
   });
 
-  const Story = sequelize.define('story', {
-    title: {
-      type: Sequelize.STRING,
-      field: 'title' 
-    },
-    description: {
-      type: Sequelize.TEXT('long')
-    },
-    audio_length: {
-        type: Sequelize.INTEGER
-      },
-    audio_url: {
-    type: Sequelize.STRING
-    },
-    artwork: {
-        type: Sequelize.STRING
-      },
+  return Series;
 
-  }, {
-    freezeTableName: true // Model tableName will be the same as the model name
-  });
+}
+
+
+//   carosel image model title img text
 
 //   define fk relationship
   Series.hasMany(Story, {
