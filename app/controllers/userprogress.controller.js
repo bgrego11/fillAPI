@@ -1,123 +1,121 @@
 const db = require("../models");
-const Series = db.series;
+const Userprogress = db.userprogress;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Series
+// Create and Save a new userprogress
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.title) {
+  if (!req.body.user_id) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
 
-  // Create a Series
-  const series = {
-    title: req.body.title,
-    description: req.body.description,
-    img: req.body.img,
-    likes: req.body.likes
+  // Create a userprogress
+  const userprogress = {
+    user_id: req.body.user_id,
+    story_id: req.body.story_id,
   };
 
-  // Save Series in the database
-  Series.create(series)
+  // Save userprogress in the database
+  Userprogress.create(userprogress)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Series."
+          err.message || "Some error occurred while creating the userprogress."
       });
     });
 };
 
 
-// // Retrieve all Seriess from the database.
+// // Retrieve all userprogresss from the database.
 exports.findAll = (req, res) => {
     // const title = req.query.title;
     // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   
-    Series.findAll({include: ["stories"]})
+    Userprogress.findAll()
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving Seriess."
+            err.message || "Some error occurred while retrieving userprogresss."
         });
       });
   };
 
-// // Find a single Series with an id
+// // Find a single userprogress with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Series.findByPk(id)
+    Userprogress.findByPk(id)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Series with id=" + id
+          message: "Error retrieving userprogress with id=" + id
         });
       });
   };
 
-// // Update a Series by the id in the request
+// // Update a userprogress by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
   
-    Series.update(req.body, {
+    Userprogress.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Series was updated successfully."
+            message: "userprogress was updated successfully."
           });
         } else {
           res.send({
-            message: `Cannot update Series with id=${id}. Maybe Series was not found or req.body is empty!`
+            message: `Cannot update userprogress with id=${id}. Maybe userprogress was not found or req.body is empty!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Series with id=" + id
+          message: "Error updating userprogress with id=" + id
         });
       });
   };
 
-// // Delete a Series with the specified id in the request
+// // Delete a userprogress with the specified id in the request
 
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Series.destroy({
+    Userprogress.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Series was deleted successfully!"
+            message: "userprogress was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Series with id=${id}. Maybe Series was not found!`
+            message: `Cannot delete userprogress with id=${id}. Maybe userprogress was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Series with id=" + id
+          message: "Could not delete userprogress with id=" + id
         });
       });
   };
 
-// // Find all published Seriess
+// // Find all published userprogresss
 // exports.findAllPublished = (req, res) => {
   
 // };
