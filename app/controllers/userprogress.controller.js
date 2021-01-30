@@ -53,7 +53,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Userprogress.findByPk(id)
+    Userprogress.findOne({where: { user_id: id }})
       .then(data => {
         res.send(data);
       })
