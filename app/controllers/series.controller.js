@@ -55,7 +55,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Series.findByPk(id)
+    Series.findByPk(id,{include: ["stories"]})
       .then(data => {
         res.send(data);
       })
