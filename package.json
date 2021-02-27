@@ -23,7 +23,8 @@
     "mongoose": "^5.11.13",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.4.0"
+    "sequelize": "^6.4.0",
+    "stripe": "^8.137.0"
   },
   "engines": {
     "node": "12.14"
