@@ -24,7 +24,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.4.0",
-    "stripe": "^8.137.0"
+    "stripe": "^8.137.0",
+    "tipsi-stripe": "^8.0.2"
   },
   "engines": {
     "node": "12.14"

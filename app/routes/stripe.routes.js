@@ -4,27 +4,19 @@ var router = require("express").Router();
 
 const stripe = require('stripe')('sk_test_xrJpzaL4Sue6z1ZWJ7F4EJAH000kd03yW2')
 
-router.post('/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: [
-      {
-        price_data: {
-          currency: 'usd',
-          product_data: {
-            name: 'T-shirt',
-          },
-          unit_amount: 2000,
-        },
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: 'https://example.com/success',
-    cancel_url: 'https://example.com/cancel',
+router.post('/charge', async (req, res) => {
+
+  const amt = req.body.amount
+  const ccy = req.body.currency
+  const src = req.body.source
+  const charge = await stripe.charges.create({
+    amount: amt,
+    currency: ccy,
+    source: src
   });
 
-  res.json({ id: session.id });
+
+  res.json({ charge: charge  });
 });
   
     // // Delete all series
