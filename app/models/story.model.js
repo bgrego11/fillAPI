@@ -10,15 +10,22 @@ module.exports = (sequelize, Sequelize) => {
         description: {
           type: Sequelize.TEXT('long')
         },
-        audio_length: {
+        duration: {
             type: Sequelize.INTEGER
           },
-        audio_url: {
+        url: {
         type: Sequelize.STRING
         },
         artwork: {
             type: Sequelize.STRING
           },
+        type: {
+            type: Sequelize.STRING
+        },
+        album: {
+          type: Sequelize.STRING
+        }
+       
     
       }, {
         freezeTableName: true // Model tableName will be the same as the model name

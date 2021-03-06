@@ -1,5 +1,5 @@
 const db = require("../models");
-const Story = db.story;
+const Section = db.section;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Story
@@ -13,19 +13,17 @@ exports.create = (req, res) => {
   }
 
   // Create a Story
-  const story = {
+  const section = {
     title: req.body.title,
-    description: req.body.description,
-    duration: req.body.duration,
-    url: req.body.url,
-    artwork: req.body.artwork,
-    series_id: req.body.series_id,
-    type: req.body.type,
-    album: req.body.album
+    sub_title: req.body.sub_title,
+    text: req.body.text,
+    order: req.body.order,
+    story_id: req.body.story_id
+    
   };
 
   // Save Story in the database
-  Story.create(story)
+  Section.create(section)
     .then(data => {
       res.send(data);
     })
@@ -43,14 +41,14 @@ exports.findAll = (req, res) => {
     // const title = req.query.title;
     // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   
-    Story.findAll({include: ["sections"]})
+    Section.findAll()
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving Storys."
+            err.message || "Some error occurred while retrieving Section."
         });
       });
   };
@@ -59,13 +57,13 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Story.findByPk(id)
+    Section.findByPk(id)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving Story with id=" + id
+          message: "Error retrieving Section with id=" + id
         });
       });
   };
@@ -74,7 +72,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
   
-    Story.update(req.body, {
+    Section.update(req.body, {
       where: { id: id }
     })
       .then(num => {
@@ -100,7 +98,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Story.destroy({
+    Section.destroy({
       where: { id: id }
     })
       .then(num => {

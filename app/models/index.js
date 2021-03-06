@@ -10,6 +10,7 @@ db.sequelize = sequelize;
 
 db.series = require("./series.model.js")(sequelize, Sequelize);
 db.story = require("./story.model.js")(sequelize, Sequelize);
+db.section = require("./section.model.js")(sequelize, Sequelize);
 db.userprogress = require("./userprogress.model.js")(sequelize, Sequelize);
 
 db.series.hasMany(db.story, {
@@ -21,6 +22,14 @@ db.series.hasMany(db.story, {
 
 
 db.story.hasMany(db.userprogress, {
+    foreignKey: {
+        name: 'story_id',
+        allowNull: false
+      }
+
+})
+
+db.story.hasMany(db.section, {
     foreignKey: {
         name: 'story_id',
         allowNull: false
