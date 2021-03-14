@@ -59,7 +59,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Story.findByPk(id)
+    Story.findByPk(id,{include: ["sections"]})
       .then(data => {
         res.send(data);
       })
