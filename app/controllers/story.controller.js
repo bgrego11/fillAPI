@@ -43,7 +43,7 @@ exports.findAll = (req, res) => {
     // const title = req.query.title;
     // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   
-    Story.findAll({include: ["sections"]})
+    Story.findAll({include: ["sections","st_tags"]})
       .then(data => {
         res.send(data);
       })
@@ -59,7 +59,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Story.findByPk(id,{include: ["sections"]})
+    Story.findByPk(id,{include: ["sections","st_tags"]})
       .then(data => {
         res.send(data);
       })
