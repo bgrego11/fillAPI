@@ -13,6 +13,7 @@ db.story = require("./story.model.js")(sequelize, Sequelize);
 db.section = require("./section.model.js")(sequelize, Sequelize);
 db.userprogress = require("./userprogress.model.js")(sequelize, Sequelize);
 db.st_tag = require("./st_tag.model.js")(sequelize, Sequelize);
+db.carousel = require("./carousel.model.js")(sequelize, Sequelize);
 
 db.series.hasMany(db.story, {
     foreignKey: {
