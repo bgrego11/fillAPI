@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
-const NewSeriesModal = (props) => {
+const EditSeriesModal = (props) => {
   const {
     className
   } = props;
@@ -27,16 +27,16 @@ const NewSeriesModal = (props) => {
 
     event.preventDefault();
     const requestOptions = {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         title,
         description,
         "img": coverImage,
-        "likes": 0
+        "likes": props.likes, 
        })
   };
-  fetch('https://evening-springs-63282.herokuapp.com/api/series', requestOptions)
+  fetch(`https://evening-springs-63282.herokuapp.com/api/series/${props.id}`, requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);
@@ -58,27 +58,30 @@ const NewSeriesModal = (props) => {
 
       useEffect(() => {
         setModal(props.isOpen)
-      }, [ props.isOpen ]);
+        setTitle(props.title);
+        setDescription(props.description)
+        setCoverImage(props.img)
+      }, [ props.isOpen, props.title, props.description, props.img ]);
 
 
   return (
     <div>
       <Modal isOpen={modal} toggle={props.toggle} className={className}>
-        <ModalHeader toggle={props.toggle}>Add a Series</ModalHeader>
+        <ModalHeader toggle={props.toggle}>Edit a Series</ModalHeader>
         <ModalBody>
         <Form>
             <FormGroup>
                 <Label for="title">Title</Label>
-                <Input type="text" name="title" id="seriesTitle" placeholder="Add Title" onChange={handleTitleChange} />
+                <Input type="text" name="title" id="seriesTitle" placeholder="Add Title" onChange={handleTitleChange} value={title} />
                 <Label for="description">Description</Label>
-                <Input type="textarea" name="title" id="seriesDesc" placeholder="Add Description" onChange={handleDescriptionChange} />
+                <Input type="textarea" name="title" id="seriesDesc" placeholder="Add Description" onChange={handleDescriptionChange} value={description} />
                 <Label for="imageUrl">Cover Image URL</Label>
-                <Input type="text" name="title" id="seriesImg" placeholder="Add Image URL" onChange={handleCoverImageChange} />
+                <Input type="text" name="title" id="seriesImg" placeholder="Add Image URL" onChange={handleCoverImageChange} value={coverImage} />
             </FormGroup>
         </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleSubmit}>Add Series</Button>{' '}
+          <Button color="primary" onClick={handleSubmit}>Update Series</Button>{' '}
           <Button color="secondary" onClick={props.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
@@ -86,4 +89,4 @@ const NewSeriesModal = (props) => {
   );
 }
 
-export default NewSeriesModal;
+export default EditSeriesModal;

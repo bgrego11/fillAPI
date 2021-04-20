@@ -37,10 +37,10 @@ const SeriesScreen = (props) => {
       <Container className="seriesContainer">
         <Row>
             {seriesData.map((series) => {
-                return <Col xs="12" sm="4"><SeriesCard  seriesData={series}/></Col>
+                return <Col xs="12" sm="6"><SeriesCard  seriesData={series}/></Col>
             })
         }
-        <Col xs="12" sm="4">
+        <Col xs="12" sm="6">
               <Card>
         <CardBody>
           <CardTitle tag="h3">Add New Series</CardTitle>
