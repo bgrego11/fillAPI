@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, CardBody,
+import React, { useEffect, useState, Fragment } from 'react';
+import { Row, Col, Card, CardBody,
   CardTitle, Button} from 'reactstrap';
 
 // Components
@@ -30,14 +30,13 @@ const SeriesScreen = (props) => {
         }
         );
         let newData = await res.json();
-        console.log(newData);
         setSeriesData(newData);
       };
     return (
-      <Container className="seriesContainer">
+      <Fragment>
         <Row>
             {seriesData.map((series) => {
-                return <Col xs="12" sm="6"><SeriesCard  seriesData={series}/></Col>
+                return <Col xs="12" sm="6"><SeriesCard toggleScreen={props.toggleScreen} seriesData={series}/></Col>
             })
         }
         <Col xs="12" sm="6">
@@ -50,7 +49,7 @@ const SeriesScreen = (props) => {
       </Col>
         </Row>
         <NewSeriesModal isOpen={modal} toggle={toggle} />
-      </Container>
+        </Fragment>
     );
   }
   

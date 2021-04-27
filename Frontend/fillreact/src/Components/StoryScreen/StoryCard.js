@@ -3,7 +3,7 @@ import {
   Card, CardImg, CardText, CardBody,
   CardTitle, Button
 } from 'reactstrap';
-import EditSeriesModal from './EditSeriesModal';
+// import EditSeriesModal from './EditSeriesModal';
 
 const SeriesCard = (props) => {
 
@@ -51,7 +51,7 @@ fetch(`https://evening-springs-63282.herokuapp.com/api/series/${props.seriesData
           <Button onClick={handleDelete}>Delete</Button>
         </CardBody>
       </Card>
-      <EditSeriesModal id={props.seriesData.id} title={props.seriesData.title} img={props.seriesData.img} description={props.seriesData.description} likes={props.seriesData.likes} isOpen={modal} toggle={toggle}  />
+      {/* <EditSeriesModal id={props.seriesData.id} title={props.seriesData.title} img={props.seriesData.img} description={props.seriesData.description} likes={props.seriesData.likes} isOpen={modal} toggle={toggle}  /> */}
     </div>
   );
 };
