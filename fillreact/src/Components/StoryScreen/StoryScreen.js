@@ -7,7 +7,7 @@ import StoryCard from './StoryCard'
 
 
 
-const StoryScreen = (props) => {
+const StoryScreen = ({toggleScreen, seriesID}) => {
     const [storyData, setStoryData] = useState([]);
     // const [loading, setLoading] = useState(true);
     const [modal, setModal] = useState(false);
@@ -18,36 +18,41 @@ const StoryScreen = (props) => {
       
     useEffect(() => {
         fetchStoryData();
-      }, []);
+      }, [ seriesID ]);
     
       const fetchStoryData = async () => {
-        let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/series/${props.seriesID}`, {
+        let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/series/${seriesID}`, {
             'Content-Type':'application/json',
             'Accept': 'application/json',
             'Access-Control-Allow-Origin': 'http://localhost:3000',
         }
         );
-        let storyData = await res.json();
-        console.log(storyData);
-        setStoryData(storyData);
+        let seriesData = await res.json();
+        console.log(seriesData);
+        setStoryData(seriesData.stories);
       };
-      console.log(storyData);
+
+      const handleScreen = () => {
+        window.location = '/'
+      }
+
     return (
       <Container className="seriesContainer">
-        {/* <Row>
-            {storyData.map((series) => {
-                return <Col xs="12" sm="6"><StoryCard  storyData={storyData}/></Col>
+        <Button onClick={handleScreen}>Back to Series</Button>
+        <Row>
+            {storyData && storyData.map((story) => {
+                return <Col xs="12" sm="6"><StoryCard  cardData={story}/></Col>
             })
         }
         <Col xs="12" sm="6">
               <Card>
         <CardBody>
-          <CardTitle tag="h3">Add New Story</CardTitle>
+          <CardTitle tag="h3">Add New Section</CardTitle>
           <Button modalopen={modal} onClick={toggle}>Click to Add</Button>
         </CardBody>
       </Card>
       </Col>
-        </Row> */}
+        </Row>
         {/* <NewSeriesModal isOpen={modal} toggle={toggle} /> */}
       </Container>
     );

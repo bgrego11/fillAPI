@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 // import EditSeriesModal from './EditSeriesModal';
 
-const SeriesCard = (props) => {
+const StoryCard = ({cardData, toggleScreen}) => {
 
 const [modal, setModal] = useState(false);
 const toggle = () => {
@@ -20,7 +20,7 @@ const handleDelete = (event) => {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
 };
-fetch(`https://evening-springs-63282.herokuapp.com/api/series/${props.seriesData.id}`, requestOptions)
+fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, requestOptions)
 .then(async response => {
     const data = await response.json();
     console.log(data);
@@ -42,18 +42,18 @@ fetch(`https://evening-springs-63282.herokuapp.com/api/series/${props.seriesData
   return (
     <div className="space-bottom">
       <Card>
-        <CardImg top width="100%" src={props.seriesData.img} alt="Card image cap" />
+        <CardImg top width="100%" src={cardData.artwork} alt="Card image cap" />
         <CardBody>
-          <CardTitle tag="h5">{props.seriesData && props.seriesData.title}</CardTitle>
-          <CardText className="seriesText">{props.seriesData.description}</CardText>
-          <Button onClick={() => props.toggleScreen('story', props.seriesData.id)}>Add Stories</Button>
+          <CardTitle tag="h5">{cardData && cardData.title}</CardTitle>
+          <CardText className="seriesText">{cardData.description}</CardText>
+          {/* <Button onClick={() => toggleScreen('story', cardData.id)}>Add Stories</Button> */}
           <Button isOpen={modal} onClick={toggle} >Edit</Button>
           <Button onClick={handleDelete}>Delete</Button>
         </CardBody>
       </Card>
-      {/* <EditSeriesModal id={props.seriesData.id} title={props.seriesData.title} img={props.seriesData.img} description={props.seriesData.description} likes={props.seriesData.likes} isOpen={modal} toggle={toggle}  /> */}
+      {/* <EditSeriesModal id={cardData.id} title={cardData.title} img={cardData.img} description={cardData.description} likes={cardData.likes} isOpen={modal} toggle={toggle}  /> */}
     </div>
   );
 };
 
-export default SeriesCard;
+export default StoryCard;

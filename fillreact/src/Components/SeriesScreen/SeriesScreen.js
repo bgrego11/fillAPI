@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { Row, Col, Card, CardBody,
-  CardTitle, Button} from 'reactstrap';
+  CardTitle, Button, Spinner} from 'reactstrap';
 
 // Components
 import SeriesCard from './SeriesCard'
@@ -9,9 +9,9 @@ import NewSeriesModal from './NewSeriesModal'
 
 
 
-const SeriesScreen = (props) => {
+const SeriesScreen = ({toggleScreen}) => {
     const [seriesData, setSeriesData] = useState([]);
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [modal, setModal] = useState(false);
     const toggle = () => {
       console.log("i am working")
@@ -23,6 +23,7 @@ const SeriesScreen = (props) => {
       }, []);
     
       const fetchSeriesData = async () => {
+        try {
         let res = await fetch('https://evening-springs-63282.herokuapp.com/api/series', {
             'Content-Type':'application/json',
             'Accept': 'application/json',
@@ -31,12 +32,22 @@ const SeriesScreen = (props) => {
         );
         let newData = await res.json();
         setSeriesData(newData);
+        setLoading(false)
+      } catch {
+        setLoading(false)
+      }
       };
     return (
       <Fragment>
+        { loading ?   
+        <div className="spinnerCenter">
+        <Spinner color="primary" />
+        </div>
+        :
+        <div>
         <Row>
             {seriesData.map((series) => {
-                return <Col xs="12" sm="6"><SeriesCard toggleScreen={props.toggleScreen} seriesData={series}/></Col>
+                return <Col xs="12" sm="6"><SeriesCard toggleScreen={toggleScreen} seriesData={series}/></Col>
             })
         }
         <Col xs="12" sm="6">
@@ -49,6 +60,8 @@ const SeriesScreen = (props) => {
       </Col>
         </Row>
         <NewSeriesModal isOpen={modal} toggle={toggle} />
+        </div>
+      }
         </Fragment>
     );
   }
