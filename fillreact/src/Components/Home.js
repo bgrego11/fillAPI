@@ -18,8 +18,7 @@ const EditScreen = (props) => {
 
 return (
     <Container className="seriesContainer">
-        {screenType === 'Series' ? <SeriesScreen toggleScreen={toggleScreen} /> : <StoryScreen seriesID={seriesID} toggleScreen={toggleScreen} />}
-        {/* <SeriesScreen toggleScreen={toggleScreen} /> */}
+        {screenType === 'Series' ? <SeriesScreen toggleScreen={toggleScreen} /> : <StoryScreen seriesID={seriesID} />}
     </Container>
 );
 }
