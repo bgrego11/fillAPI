@@ -41,7 +41,7 @@ const SeriesScreen = ({toggleScreen}) => {
       <Fragment>
         { loading ?   
         <div className="spinnerCenter">
-        <Spinner color="primary" />
+        <Spinner type="grow" style={{  width: '5rem', height: '5rem', color:"#f092a4" }} />
         </div>
         :
         <div>

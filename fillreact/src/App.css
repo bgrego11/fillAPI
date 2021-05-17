@@ -14,3 +14,8 @@
 .spinnerCenter {
     text-align: center;
 }
+
+.storyText {
+    height: 10em;
+    overflow-x: scroll;
+}

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Card, CardImg, CardText, CardBody,
   CardTitle, Button
 } from 'reactstrap';
-// import EditSeriesModal from './EditSeriesModal';
+import EditStoryModal from './EditStoryModal'
 
-const StoryCard = ({cardData, toggleScreen}) => {
+const StoryCard = ({cardData, toggleScreen, sectionData}) => {
 
 const [modal, setModal] = useState(false);
 const toggle = () => {
@@ -39,19 +39,23 @@ fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, re
 });
 };
 
+
+
+
   return (
     <div className="space-bottom">
       <Card>
         <CardImg top width="100%" src={cardData.artwork} alt="Card image cap" />
         <CardBody>
           <CardTitle tag="h5">{cardData && cardData.title}</CardTitle>
-          <CardText className="seriesText">{cardData.description}</CardText>
+          <CardText className="storyText">{cardData.description}</CardText>
+          <CardText></CardText>
           {/* <Button onClick={() => toggleScreen('story', cardData.id)}>Add Stories</Button> */}
           <Button isOpen={modal} onClick={toggle} >Edit</Button>
           <Button onClick={handleDelete}>Delete</Button>
         </CardBody>
       </Card>
-      {/* <EditSeriesModal id={cardData.id} title={cardData.title} img={cardData.img} description={cardData.description} likes={cardData.likes} isOpen={modal} toggle={toggle}  /> */}
+      <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} toggle={toggle}  />
     </div>
   );
 };
