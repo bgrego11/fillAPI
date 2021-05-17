@@ -3,7 +3,6 @@ import './App.css';
 
 // Components
 import NavBar from './Components/Nav'
-import SeriesScreen from './Components/SeriesScreen/SeriesScreen'
 import Home from './Components/Home'
 
 function App() {
