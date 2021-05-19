@@ -23,6 +23,7 @@
     "mongoose": "^5.11.13",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
+    "path": "^0.12.7",
     "sequelize": "^6.4.0",
     "stripe": "^8.137.0",
     "tipsi-stripe": "^8.0.2"
