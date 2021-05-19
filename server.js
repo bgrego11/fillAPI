@@ -23,9 +23,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/fillreact", "build")));
 app.use(express.static("public"));
 
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "fillreact/build", "index.html"));
-});
+// app.use((req, res, next) => {
+//   res.sendFile(path.join(__dirname, "fillreact/build", "index.html"));
+// });
 
 require("./app/routes/series.routes")(app);
 require("./app/routes/story.routes")(app);
