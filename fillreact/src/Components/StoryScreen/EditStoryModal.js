@@ -10,7 +10,11 @@ const EditStoryModal = (props) => {
   const [title, setTitle ] = useState('');
   const [description, setDescription ] = useState('');
   const [coverImage, setCoverImage ] = useState('');
+  const [audioURL, setAudioURL] = useState('');
   const [storyDuration, setStoryDuration] = useState('');
+  const [newSectionTitle, setNewSectionTitle] = useState('');
+  const [newSectionSubTitle, setNewSectionSubTitle] = useState('');
+  const [newSectionText, setNewSectionText] = useState('');
   const [sectionData, setSectionData] = useState([])
 
   const handleTitleChange = event => {
@@ -23,6 +27,10 @@ const EditStoryModal = (props) => {
 
   const handleCoverImageChange = event => {
     setCoverImage(event.target.value);
+  };
+
+  const handleStoryAudioURLChange = event => {
+    setAudioURL(event.target.value);
   };
 
   const handleStoryDurationChange = event => {
@@ -38,8 +46,9 @@ const EditStoryModal = (props) => {
       body: JSON.stringify({
         title,
         description,
-        "img": coverImage,
-        "likes": props.likes, 
+        "artwork": coverImage,
+        duration: storyDuration,
+        url: audioURL,
        })
   };
   fetch(`https://evening-springs-63282.herokuapp.com/api/story/${props.id}`, requestOptions)
@@ -53,7 +62,6 @@ const EditStoryModal = (props) => {
           const error = (data && data.message) || response.status;
           return Promise.reject(error);    
       }
-      
   })
   .catch(error => {
     
@@ -67,6 +75,7 @@ const EditStoryModal = (props) => {
         setTitle(props.title);
         setDescription(props.description)
         setCoverImage(props.img)
+        setAudioURL(props.audioURL)
         setStoryDuration(props.duration)
         fetchSectionData()
 
@@ -87,31 +96,44 @@ const EditStoryModal = (props) => {
 
   return (
     <div>
-      <Modal isOpen={modal} toggle={props.toggle} className={className}>
+      <Modal size="lg" isOpen={modal} toggle={props.toggle} className={className}>
         <ModalHeader toggle={props.toggle}>Edit a Story</ModalHeader>
         <ModalBody>
         <Form>
             <FormGroup>
-                <Label for="title">Title</Label>
+                <Label className="cardModalTitle" for="title">Title</Label>
                 <Input type="text" name="title" id="storyTitle" placeholder="Add Title" onChange={handleTitleChange} value={title} />
-                <Label for="description">Description</Label>
+                <Label className="cardModalTitle" for="description">Description</Label>
                 <Input type="textarea" name="title" id="storyDesc" placeholder="Add Description" onChange={handleDescriptionChange} value={description} />
-                <Label for="imageUrl">Cover Image URL</Label>
+                <Label className="cardModalTitle" for="imageUrl">Cover Image URL</Label>
                 <Input type="text" name="title" id="storyImg" placeholder="Add Image URL" onChange={handleCoverImageChange} value={coverImage} />
-                <Label for="imageUrl">Duration of Audio</Label>
+                <Label className="cardModalTitle" for="imageUrl">Audio URL</Label>
+                <Input type="text" name="title" id="storyAudioURL" placeholder="Add Audio URL" onChange={handleStoryAudioURLChange} value={audioURL} />
+                <Label className="cardModalTitle" for="imageUrl">Duration of Audio</Label>
                 <Input type="text" name="title" id="storyDuration" placeholder="Add Duration Amount in Seconds" onChange={handleStoryDurationChange} value={storyDuration} />
+
                 {
-                  sectionData.map((section) => {
+                  sectionData.length > 0 && sectionData.map((section) => {
                     return (
-                      <Fragment>
-                      <Label for="imageUrl">Enter Section</Label>
+                      <div>
+                      <Label className="addSection cardModalTitle" for="imageUrl">Enter Section</Label>
                         <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  value={section.title} />
-                        <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title" value={section.sub_title} />
-                        <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title" value={section.text} />
-                      </Fragment>
+                        <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" value={section.sub_title} />
+                        <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" value={section.text} />
+                        <Button >Edit Section</Button>
+                        <Button >Delete Section</Button>
+                      </div>
                     )
                   })
                 }
+                <div className="addSection">
+                <Label className="addSection cardModalTitle" for="imageUrl">Add New Section</Label>
+                    <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  value={newSectionTitle} />
+                    <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" value={newSectionSubTitle} />
+                    <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" value={newSectionText} />
+                <Button>Add Section</Button>
+
+                </div>
             </FormGroup>
         </Form>
         </ModalBody>
