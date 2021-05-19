@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "/fillreact", "build")));
 app.use(express.static("public"));
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "fillreact", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "fillreact/build", "index.html"));
 });
 
 require("./app/routes/series.routes")(app);
