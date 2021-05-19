@@ -1,121 +1,124 @@
 const db = require("../models");
-const Userprogress = db.userprogress;
+const Carousel = db.carousel;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new userprogress
+// Create and Save a new Story
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.user_id) {
+  if (!req.body.dt_url) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
 
-  // Create a userprogress
-  const userprogress = {
-    user_id: req.body.user_id,
-    story_id: req.body.story_id,
+  // Create a Story
+  const carousel = {
+    dt_url: req.body.dt_url,
+    dt_route_name: req.body.dt_route_name,
+    mb_url: req.body.mb_url,
+    mb_route_name: req.body.mb_route_name,
+    
   };
 
-  // Save userprogress in the database
-  Userprogress.create(userprogress)
+  // Save Story in the database
+  Carousel.create(carousel)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the userprogress."
+          err.message || "Some error occurred while creating the Story."
       });
     });
 };
 
 
-// // Retrieve all userprogresss from the database.
+// // Retrieve all Storys from the database.
 exports.findAll = (req, res) => {
     // const title = req.query.title;
     // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   
-    Userprogress.findAll()
+    Carousel.findAll()
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving userprogresss."
+            err.message || "Some error occurred while retrieving Carousel."
         });
       });
   };
 
-// // Find a single userprogress with an id
+// // Find a single Story with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Userprogress.findAll({where: { user_id: id }})
+    Carousel.findByPk(id)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving userprogress with id=" + id
+          message: "Error retrieving Carousel with id=" + id
         });
       });
   };
 
-// // Update a userprogress by the id in the request
+// // Update a Story by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
   
-    Userprogress.update(req.body, {
+    Carousel.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "userprogress was updated successfully."
+            message: "Story was updated successfully."
           });
         } else {
           res.send({
-            message: `Cannot update userprogress with id=${id}. Maybe userprogress was not found or req.body is empty!`
+            message: `Cannot update Story with id=${id}. Maybe Story was not found or req.body is empty!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating userprogress with id=" + id
+          message: "Error updating Story with id=" + id
         });
       });
   };
 
-// // Delete a userprogress with the specified id in the request
+// // Delete a Story with the specified id in the request
 
 exports.delete = (req, res) => {
     const id = req.params.id;
   
-    Userprogress.destroy({
+    Carousel.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "userprogress was deleted successfully!"
+            message: "Story was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete userprogress with id=${id}. Maybe userprogress was not found!`
+            message: `Cannot delete Story with id=${id}. Maybe Story was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete userprogress with id=" + id
+          message: "Could not delete Story with id=" + id
         });
       });
   };
 
-// // Find all published userprogresss
+// // Find all published Storys
 // exports.findAllPublished = (req, res) => {
   
 // };

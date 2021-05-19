@@ -19,9 +19,6 @@ module.exports = (sequelize, Sequelize) => {
         artwork: {
             type: Sequelize.STRING
           },
-        type: {
-            type: Sequelize.STRING
-        },
         album: {
           type: Sequelize.STRING
         }
