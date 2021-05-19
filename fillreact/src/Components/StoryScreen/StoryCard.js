@@ -39,9 +39,6 @@ fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, re
 });
 };
 
-
-
-
   return (
     <div className="space-bottom">
       <Card>
@@ -55,7 +52,7 @@ fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, re
           <Button onClick={handleDelete}>Delete</Button>
         </CardBody>
       </Card>
-      <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} toggle={toggle}  />
+      <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} audioURL={cardData.url} toggle={toggle}  />
     </div>
   );
 };

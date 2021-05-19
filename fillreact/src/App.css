@@ -19,3 +19,11 @@
     height: 10em;
     overflow-x: scroll;
 }
+
+.addSection {
+    margin-top: 20px;
+}
+
+.cardModalTitle {
+    font-size: 24px;
+}
