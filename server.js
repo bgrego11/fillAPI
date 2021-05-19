@@ -22,10 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/fillreact", "build")));
 app.use(express.static("public"));
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
+
 
 require("./app/routes/series.routes")(app);
 require("./app/routes/story.routes")(app);
