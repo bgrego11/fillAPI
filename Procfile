@@ -1,1 +1,1 @@
-web: node server.js
+web: cd fillreact; yarn build; cd ../node server.js
