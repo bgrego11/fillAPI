@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
@@ -8,7 +9,7 @@ const db = require("./app/models");
 db.sequelize.sync();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080"
 };
 
 app.use(cors(corsOptions));
@@ -21,10 +22,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "/fillreact", "build")));
 app.use(express.static("public"));
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/fillreact/build', 'index.html'))
+})
 
 require("./app/routes/series.routes")(app);
 require("./app/routes/story.routes")(app);
