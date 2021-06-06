@@ -12,9 +12,12 @@ const EditStoryModal = (props) => {
   const [coverImage, setCoverImage ] = useState('');
   const [audioURL, setAudioURL] = useState('');
   const [storyDuration, setStoryDuration] = useState('');
-  const [newSectionTitle, setNewSectionTitle] = useState('');
-  const [newSectionSubTitle, setNewSectionSubTitle] = useState('');
-  const [newSectionText, setNewSectionText] = useState('');
+  const [addSectionTitle, setAddSectionTitle] = useState('');
+  const [addSectionSubTitle, setAddSectionSubTitle] = useState('');
+  const [addSectionText, setAddSectionText] = useState('');
+  const [editSectionTitle, setEditSectionTitle] = useState('');
+  const [editSectionSubTitle, setEditSectionSubTitle] = useState('');
+  const [editSectionText, setEditSectionText] = useState('');
   const [sectionData, setSectionData] = useState([])
 
   const handleTitleChange = event => {
@@ -36,6 +39,62 @@ const EditStoryModal = (props) => {
   const handleStoryDurationChange = event => {
     setCoverImage(event.target.value);
   };
+
+  const handleEditSectionTitle = event => {
+    setEditSectionTitle(event.target.value)
+  }
+
+  const handleEditSectionSubTitle = event => {
+    setEditSectionSubTitle(event.target.value)
+  }
+
+  const handleEditSectionText = event => {
+    setEditSectionText(event.target.value)
+  }
+
+  const handleAddSectionTitle = event => {
+    setAddSectionTitle(event.target.value)
+  }
+
+  const handleAddSectionSubTitle = event => {
+    setAddSectionSubTitle(event.target.value)
+  }
+
+  const handleAddSectionText = event => {
+    setAddSectionText(event.target.value)
+  }
+
+  const handleAddSection = (event) => {
+    event.preventDefault();
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "title": addSectionTitle,
+        "sub_title": addSectionSubTitle,
+        "text": addSectionText,
+        "story_id": `${props.id}`
+       })
+  };
+  fetch('https://evening-springs-63282.herokuapp.com/api/section', requestOptions)
+  .then(async response => {
+      const data = await response.json();
+      console.log(data);
+      props.toggle();
+      // check for error response
+      if (!response.ok) {
+          // get error message from body or default to response status
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);    
+      }
+      
+  })
+  .catch(error => {
+    
+      console.error('There was an error!', error);
+
+  });
+  }
 
   const handleSubmit = (event) => { 
 
@@ -68,6 +127,36 @@ const EditStoryModal = (props) => {
       console.error('There was an error!', error);
 
   });
+};
+
+const handleEditSection = (sectionId) => { 
+
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "title": editSectionTitle,
+      "sub_title": editSectionSubTitle,
+      "text": editSectionText,
+     })
+};
+fetch(`https://evening-springs-63282.herokuapp.com/api/section/${sectionId}`, requestOptions)
+.then(async response => {
+    const data = await response.json();
+    console.log(data);
+    props.toggle();
+    // check for error response
+    if (!response.ok) {
+        // get error message from body or default to response status
+        const error = (data && data.message) || response.status;
+        return Promise.reject(error);    
+    }
+})
+.catch(error => {
+  
+    console.error('There was an error!', error);
+
+});
 };
 
       useEffect(() => {
@@ -117,10 +206,10 @@ const EditStoryModal = (props) => {
                     return (
                       <div>
                       <Label className="addSection cardModalTitle" for="imageUrl">Enter Section</Label>
-                        <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  defaultValue={section.title} />
-                        <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" defaultValue={section.sub_title} />
-                        <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" defaultValue={section.text} />
-                        <Button >Edit Section</Button>
+                        <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title" onChange={handleEditSectionTitle}  defaultValue={section.title} />
+                        <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" onChange={handleEditSectionSubTitle}  defaultValue={section.sub_title} />
+                        <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" onChange={handleEditSectionText} defaultValue={section.text} />
+                        <Button onClick={() => handleEditSection(section.id)} >Save Edited Section</Button>
                         <Button >Delete Section</Button>
                       </div>
                     )
@@ -128,10 +217,10 @@ const EditStoryModal = (props) => {
                 }
                 <div className="addSection">
                 <Label className="addSection cardModalTitle" for="imageUrl">Add New Section</Label>
-                    <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  defaultValue={newSectionTitle} />
-                    <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" defaultValue={newSectionSubTitle} />
-                    <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" defaultValue={newSectionText} />
-                <Button>Add Section</Button>
+                    <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title" onChange={handleAddSectionTitle}  defaultValue={addSectionTitle} />
+                    <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" onChange={handleAddSectionSubTitle} defaultValue={addSectionSubTitle} />
+                    <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" onChange={handleAddSectionText} defaultValue={addSectionText} />
+                <Button onClick={handleAddSection}>Add Section</Button>
 
                 </div>
             </FormGroup>
