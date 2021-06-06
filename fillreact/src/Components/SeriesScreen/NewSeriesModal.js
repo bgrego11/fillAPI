@@ -57,13 +57,13 @@ const NewSeriesModal = (props) => {
 };
 
       useEffect(() => {
-        setModal(props.isOpen)
-      }, [ props.isOpen ]);
+        setModal(props.isopen)
+      }, [ props.isopen ]);
 
 
   return (
     <div>
-      <Modal isOpen={modal} toggle={props.toggle} className={className}>
+      <Modal isopen={modal} toggle={props.toggle} className={className}>
         <ModalHeader toggle={props.toggle}>Add a Series</ModalHeader>
         <ModalBody>
         <Form>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { Container, Row, Col, Card, CardBody,
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, CardBody,
   CardTitle, Button, Spinner} from 'reactstrap';
 
 // Components
@@ -38,7 +38,7 @@ const StoryScreen = ({seriesID, sectionData}) => {
       }
 
     return (
-      <Fragment className="seriesContainer">
+      <div className="seriesContainer">
         <Button onClick={handleScreen}>Back to Series</Button>
         { loading ?   
         <div className="spinnerCenter">
@@ -47,8 +47,8 @@ const StoryScreen = ({seriesID, sectionData}) => {
         :
         <div className="seriesContainer">
         <Row>
-            {seriesData && seriesData.map((story) => {
-                return <Col xs="12" sm="4"><StoryCard sectionData={sectionData} cardData={story}/></Col>
+            {seriesData && seriesData.map((story, index) => {
+                return <Col key={index} xs="12" sm="4"><StoryCard sectionData={sectionData} cardData={story}/></Col>
             })
           }
         <Col xs="12" sm="4">
@@ -63,7 +63,7 @@ const StoryScreen = ({seriesID, sectionData}) => {
         {/* <NewSeriesModal isOpen={modal} toggle={toggle} /> */}
         </div>
 }
-      </Fragment>
+      </div>
     );
   }
   

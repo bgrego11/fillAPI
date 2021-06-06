@@ -11,9 +11,9 @@ import {
 } from 'reactstrap';
 
 const NavBar = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isopen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => setIsOpen(!isopen);
 
   return (
     <div>
@@ -22,7 +22,7 @@ const NavBar = (props) => {
           <span className="same-logo" href="https://thefill.org/"><img className=" preload-me" src="https://thefill.org/wp-content/uploads/2019/02/The-Fill-just-words-800x800-2.png" srcSet="https://thefill.org/wp-content/uploads/2019/02/The-Fill-just-words-800x800-2.png 150w, https://thefill.org/wp-content/uploads/2019/02/The-Fill-just-words-800x800-2.png 150w" width="100" height="100" sizes="150px" alt="The Fill" ></img>
           </span></NavbarBrand>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <Collapse isopen={isopen} navbar>
           <Nav className="mr-auto" navbar>
             {/* <NavItem>
               <NavLink href="/components/">Components</NavLink>

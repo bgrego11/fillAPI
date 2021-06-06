@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const EditStoryModal = (props) => {
@@ -102,24 +102,24 @@ const EditStoryModal = (props) => {
         <Form>
             <FormGroup>
                 <Label className="cardModalTitle" for="title">Title</Label>
-                <Input type="text" name="title" id="storyTitle" placeholder="Add Title" onChange={handleTitleChange} value={title} />
+                <Input type="text" name="title" id="storyTitle" placeholder="Add Title" onChange={handleTitleChange} defaultValue={title} />
                 <Label className="cardModalTitle" for="description">Description</Label>
-                <Input type="textarea" name="title" id="storyDesc" placeholder="Add Description" onChange={handleDescriptionChange} value={description} />
+                <Input type="textarea" name="title" id="storyDesc" placeholder="Add Description" onChange={handleDescriptionChange} defaultValue={description} />
                 <Label className="cardModalTitle" for="imageUrl">Cover Image URL</Label>
-                <Input type="text" name="title" id="storyImg" placeholder="Add Image URL" onChange={handleCoverImageChange} value={coverImage} />
+                <Input type="text" name="title" id="storyImg" placeholder="Add Image URL" onChange={handleCoverImageChange} defaultValue={coverImage} />
                 <Label className="cardModalTitle" for="imageUrl">Audio URL</Label>
-                <Input type="text" name="title" id="storyAudioURL" placeholder="Add Audio URL" onChange={handleStoryAudioURLChange} value={audioURL} />
+                <Input type="text" name="title" id="storyAudioURL" placeholder="Add Audio URL" onChange={handleStoryAudioURLChange} defaultValue={audioURL} />
                 <Label className="cardModalTitle" for="imageUrl">Duration of Audio</Label>
-                <Input type="text" name="title" id="storyDuration" placeholder="Add Duration Amount in Seconds" onChange={handleStoryDurationChange} value={storyDuration} />
+                <Input type="text" name="title" id="storyDuration" placeholder="Add Duration Amount in Seconds" onChange={handleStoryDurationChange} defaultValue={storyDuration} />
 
                 {
                   sectionData.length > 0 && sectionData.map((section) => {
                     return (
                       <div>
                       <Label className="addSection cardModalTitle" for="imageUrl">Enter Section</Label>
-                        <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  value={section.title} />
-                        <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" value={section.sub_title} />
-                        <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" value={section.text} />
+                        <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  defaultValue={section.title} />
+                        <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" defaultValue={section.sub_title} />
+                        <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" defaultValue={section.text} />
                         <Button >Edit Section</Button>
                         <Button >Delete Section</Button>
                       </div>
@@ -128,9 +128,9 @@ const EditStoryModal = (props) => {
                 }
                 <div className="addSection">
                 <Label className="addSection cardModalTitle" for="imageUrl">Add New Section</Label>
-                    <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  value={newSectionTitle} />
-                    <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" value={newSectionSubTitle} />
-                    <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" value={newSectionText} />
+                    <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title"  defaultValue={newSectionTitle} />
+                    <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" defaultValue={newSectionSubTitle} />
+                    <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" defaultValue={newSectionText} />
                 <Button>Add Section</Button>
 
                 </div>

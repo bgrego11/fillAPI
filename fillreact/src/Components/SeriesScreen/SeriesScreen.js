@@ -46,8 +46,8 @@ const SeriesScreen = ({toggleScreen}) => {
         :
         <div>
         <Row>
-            {seriesData.map((series) => {
-                return <Col xs="12" sm="6"><SeriesCard toggleScreen={toggleScreen} seriesData={series}/></Col>
+            {seriesData.map((series, index) => {
+                return <Col key={index} xs="12" sm="6"><SeriesCard toggleScreen={toggleScreen} seriesData={series}/></Col>
             })
         }
         <Col xs="12" sm="6">
