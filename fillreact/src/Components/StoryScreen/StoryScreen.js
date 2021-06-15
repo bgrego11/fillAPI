@@ -4,16 +4,17 @@ import { Row, Col, Card, CardBody,
 
 // Components
 import StoryCard from './StoryCard'
+import NewStoryModal from './NewStoryModal'
 
 
 
 const StoryScreen = ({seriesID, sectionData}) => {
     const [seriesData, setSeriesData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [modal, setModal] = useState(false);
-    const toggle = () => {
-      console.log("i am working")
-      setModal(!modal);
+    const [newModal, setNewModal] = useState(false);
+
+    const newModaltoggle = () => {
+      setNewModal(!newModal);
     }
       
     useEffect(() => {
@@ -55,12 +56,12 @@ const StoryScreen = ({seriesID, sectionData}) => {
               <Card>
         <CardBody>
           <CardTitle tag="h3">Add New Story</CardTitle>
-          <Button modalopen={modal} onClick={toggle}>Click to Add</Button>
+          <Button onClick={newModaltoggle}>Click to Add</Button>
         </CardBody>
       </Card>
       </Col>
         </Row>
-        {/* <NewSeriesModal isOpen={modal} toggle={toggle} /> */}
+        <NewStoryModal isOpen={newModal} seriesID={seriesID} toggle={newModaltoggle} />
         </div>
 }
       </div>
