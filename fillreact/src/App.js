@@ -9,6 +9,7 @@ function App() {
   const { loginWithRedirect } = useAuth0();
   <button onClick={() => loginWithRedirect()}>Log In</button>
 
+  //add auth0
   return (
     <div className="App">
       <header className="App-header">
