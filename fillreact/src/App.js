@@ -1,21 +1,54 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import './App.css';
+import NavBar from './components/navigation/Nav';
+import Home from './components/routing/HomeScreen/HomeScreen';
+import Series from './components/routing/SeriesScreen/SeriesScreen';
+import Donate from './components/routing/DonateScreen/DonateScreen';
+import DashBoardScreen from './components/routing/SeriesScreen/DashBoardScreen';
 
-// Components
-import NavBar from './Components/Nav'
-import Home from './Components/Home'
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory();
+
+const ProtectedRoute = ({ component, ...args }) => (
+  <Route component={withAuthenticationRequired(component)} {...args} />
+);
+
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+
+const onRedirectCallback = (appState) => {
+  // Use the router's history module to replace the url
+  history.replace(appState?.returnTo || window.location.pathname);
+};
+
 
 function App() {
-  const { loginWithRedirect } = useAuth0();
-  <button onClick={() => loginWithRedirect()}>Log In</button>
+  // const { loginWithRedirect } = useAuth0();
+  // <button onClick={() => loginWithRedirect()}>Log In</button>
 
-  return (
+  //add auth0
+  return (<Auth0Provider
+    domain={domain}
+    clientId={clientId}
+    redirectUri={window.location.origin}
+    onRedirectCallback={onRedirectCallback}
+  >
     <div className="App">
-      <header className="App-header">
-        <NavBar />
-      </header>
-      <Home />
+      <BrowserRouter history={history}>
+        <header className="App-header">
+          <NavBar />
+        </header>
+
+        <Switch >
+          <Route exact path="/" component={Home} />
+          <ProtectedRoute path="/series" component={DashBoardScreen} />
+          <ProtectedRoute path="/donate" component={Donate} />
+        </Switch>
+      </BrowserRouter>
     </div>
+  </Auth0Provider>
   );
 }
 
