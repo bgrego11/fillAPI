@@ -6,7 +6,7 @@ import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
 
 import Home from './HomeScreen/HomeScreen';
-import Series from './SeriesScreen/SeriesScreen';
+import DashBoardScreen from './SeriesScreen/DashBoardScreen';
 import Donate from './DonateScreen/DonateScreen';
 
 export const history = createBrowserHistory();
@@ -20,7 +20,7 @@ const Routes = () => {
     <BrowserRouter history={history}>
       <Switch >
         <Route exact path="/" component={Home} />
-        <ProtectedRoute path="/series" component={Series} />
+        <ProtectedRoute path="/series" component={DashBoardScreen} />
         <ProtectedRoute path="/donate" component={Donate} />
         {/* <Route path="/shop" component={Shop} /> */}
       </Switch>

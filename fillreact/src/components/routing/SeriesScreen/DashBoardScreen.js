@@ -2,19 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'reactstrap';
 
 // Components
-import SeriesScreen from '../SeriesScreen/SeriesScreen';
+import SeriesScreen from './SeriesScreen';
 import StoryScreen from '../StoryScreen/StoryScreen';
 
-const EditScreen = (props) => {
+const DashBoardScreen = (props) => {
   const [screenType, setScreenType] = useState('Series');
   const [sectionData, setSectionData] = useState([]);
   const [seriesID, setSeriesID] = useState('')
   const toggleScreen = (screen, id) => {
-    console.log("i am working")
     setScreenType(screen)
     setSeriesID(id)
-    console.log(screen)
-    console.log(id)
   }
 
   const fetchSectionData = async () => {
@@ -39,4 +36,4 @@ const EditScreen = (props) => {
     </Container>
   );
 }
-export default EditScreen;
+export default DashBoardScreen;

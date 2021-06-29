@@ -3,6 +3,7 @@ import NavBar from './components/navigation/Nav';
 import Home from './components/routing/HomeScreen/HomeScreen';
 import Series from './components/routing/SeriesScreen/SeriesScreen';
 import Donate from './components/routing/DonateScreen/DonateScreen';
+import DashBoardScreen from './components/routing/SeriesScreen/DashBoardScreen';
 
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
@@ -42,9 +43,8 @@ function App() {
 
         <Switch >
           <Route exact path="/" component={Home} />
-          <ProtectedRoute path="/series" component={Series} />
+          <ProtectedRoute path="/series" component={DashBoardScreen} />
           <ProtectedRoute path="/donate" component={Donate} />
-          {/* <Route path="/shop" component={Shop} /> */}
         </Switch>
       </BrowserRouter>
     </div>
