@@ -1,16 +1,16 @@
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 
-const DonateScreen = () => {
+const FillSistersScreen = () => {
   return (
-    <>
+    <Container>
       <Row>
         <Col>
-          Donate
+          Fill Sisters Form
         </Col>
       </Row>
-    </>
+    </Container>
   )
 }
 
-export default DonateScreen;
+export default FillSistersScreen;

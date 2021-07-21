@@ -27,3 +27,18 @@
 .cardModalTitle {
     font-size: 24px;
 }
+
+/* Added by Ghassan */
+
+.divider {
+  height: 1px;
+  width:100%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+/* 
+body {
+  padding-top: 100px;
+} */

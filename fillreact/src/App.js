@@ -2,12 +2,14 @@ import './App.css';
 import NavBar from './components/navigation/Nav';
 import Home from './components/routing/HomeScreen/HomeScreen';
 import Series from './components/routing/SeriesScreen/SeriesScreen';
-import Donate from './components/routing/DonateScreen/DonateScreen';
+import DonateScreen from './components/routing/DonateScreen/DonateScreen';
+import FillSistersScreen from './components/routing/FillSistersScreen/FillSistersScreen';
 import DashBoardScreen from './components/routing/SeriesScreen/DashBoardScreen';
 
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Auth0Provider, withAuthenticationRequired } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
+import { Card, CardFooter, Container } from 'reactstrap';
 
 export const history = createBrowserHistory();
 
@@ -37,15 +39,21 @@ function App() {
   >
     <div className="App">
       <BrowserRouter history={history}>
-        <header className="App-header">
-          <NavBar />
-        </header>
+        {/* <header className="App-header"> */}
 
-        <Switch >
-          <Route exact path="/" component={Home} />
-          <ProtectedRoute path="/series" component={DashBoardScreen} />
-          <ProtectedRoute path="/donate" component={Donate} />
-        </Switch>
+        <NavBar />
+        {/* </header> */}
+        <Container>
+          <Switch >
+            <Route exact path="/" component={Home} />
+            <ProtectedRoute path="/series" component={DashBoardScreen} />
+            <ProtectedRoute path="/donate" component={DonateScreen} />
+            <ProtectedRoute path="/fillsisters" component={FillSistersScreen} />
+          </Switch>
+        </Container>
+        <Card>
+          <CardFooter className="text-muted text-center"><p>© GraceMeetsReality. All rights reserved.</p></CardFooter>
+        </Card>
       </BrowserRouter>
     </div>
   </Auth0Provider>
