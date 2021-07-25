@@ -40,8 +40,9 @@ function App() {
     <div className="App">
       <BrowserRouter history={history}>
         {/* <header className="App-header"> */}
-
-        <NavBar />
+        <Container>
+          <NavBar />
+        </Container>
         {/* </header> */}
         <Container>
           <Switch >
@@ -51,8 +52,8 @@ function App() {
             <ProtectedRoute path="/fillsisters" component={FillSistersScreen} />
           </Switch>
         </Container>
-        <Card>
-          <CardFooter className="text-muted text-center"><p>© GraceMeetsReality. All rights reserved.</p></CardFooter>
+        <Card className="border-top-0 bg-white">
+          <CardFooter style={{ backgroundColor: "rgba(255,0,0,0.1)", paddingBottom: "0", marginBottom: "0" }} className="text-muted text-center border-top-0 "><p style={{ marginBottom: "0" }}>© GraceMeetsReality. All rights reserved.</p></CardFooter>
         </Card>
       </BrowserRouter>
     </div>

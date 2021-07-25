@@ -28,7 +28,8 @@ const HomeScreen = () => {
         </Col>
       </Row>
       <Row className="justify-content-center">
-        <Col xs="8" sm="8" md="6" lg="5" xl="4" className="text-center" >
+        <Col xs="4" sm="4" md="4" lg="4" xl="4" className="text-center" >
+          {/* <Col xs="8" sm="8" md="6" lg="5" xl="4" className="text-center" > */}
           <img width="100%" src={ChristineImage} alt="" />
         </Col>
       </Row>

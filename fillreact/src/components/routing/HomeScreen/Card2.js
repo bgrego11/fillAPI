@@ -18,8 +18,8 @@ const Card2 = (props) => {
         <img width="100%" src={FillUpImage} alt="" />
         <CardBody>
           <CardText>Encouragement for Daily Fill Up Time</CardText>
-          <CardLink href="https://www.facebook.com/thefillapp" rel="noopener noreferrer" target="_blank"><FB_SVG color="blue" /></CardLink>
-          <CardLink href="https://www.instagram.com/christine_thefill/" rel="noopener noreferrer" target="_blank"><INSTAGRAM_SVG color="red" /></CardLink>
+          <CardLink href="https://www.facebook.com/thefillapp" rel="noopener noreferrer" target="_blank"><FB_SVG color="rgb(66,103,178)" size="24" /></CardLink>
+          <CardLink href="https://www.instagram.com/christine_thefill/" rel="noopener noreferrer" target="_blank"><INSTAGRAM_SVG color="rgb(253,29,29)" size="24" /></CardLink>
         </CardBody>
       </Card>
     </div>
