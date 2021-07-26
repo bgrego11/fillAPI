@@ -22,10 +22,10 @@ const ProtectedRoute = ({ component, ...args }) => (
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
-// const onRedirectCallback = (appState) => {
-//   // Use the router's history module to replace the url
-//   history.replace(appState?.returnTo || window.location.pathname);
-// };
+const onRedirectCallback = (appState) => {
+  // Use the router's history module to replace the url
+  history.replace(appState?.returnTo || window.location.pathname);
+};
 
 
 function App() {
@@ -37,7 +37,7 @@ function App() {
     domain={domain}
     clientId={clientId}
     redirectUri={window.location.origin}
-  // onRedirectCallback={onRedirectCallback}
+    onRedirectCallback={onRedirectCallback}
   >
     <div className="App">
       <BrowserRouter history={history}>

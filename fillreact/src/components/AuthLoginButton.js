@@ -5,12 +5,13 @@ import { Button } from 'reactstrap';
 function LoginButton() {
   const {
     isAuthenticated,
-    loginWithPopup,
-    // loginWithRedirect,
+    // loginWithPopup,
+    loginWithRedirect,
   } = useAuth0();
 
   return !isAuthenticated && (
-    <Button onClick={loginWithPopup}>Log in</Button>
+    // <Button onClick={loginWithPopup}>Log in</Button>
+    <Button onClick={loginWithRedirect}>Log in</Button>
   );
 }
 
