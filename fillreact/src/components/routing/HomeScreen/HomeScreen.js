@@ -12,17 +12,17 @@ const HomeScreen = () => {
   return (
     // <Container>
     <>
-      <Row className="justify-content-center">
+      {/* <Row className="justify-content-center">
         <Col className="text-center">The Daily Routine</Col>
       </Row>
       <Row className="justify-content-center">
         <Col className="text-center" >To Make True Fulfillment a Lifestyle</Col>
-      </Row>
-      {/* <Row className="justify-content-center">
+      </Row> */}
+      <Row className="justify-content-center">
         <Col >
           <HomeCarousel />
         </Col>
-      </Row> */}
+      </Row>
       <Row>
         <Col className="divider">
         </Col>

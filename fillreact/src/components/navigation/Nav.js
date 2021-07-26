@@ -49,31 +49,32 @@ const NavBar = (props) => {
           </NavItem>
         </Nav>
         <Nav navbar>
-          <NavItem>
-            <AuthWrapper>
-              <LoginButton /><LogoutButton />
-            </AuthWrapper>
-          </NavItem>
+
           <NavItem >
             <NavLink style={{ paddingLeft: "8px", paddingRight: "8px" }} href="https://www.facebook.com/thefillapp" rel="noopener noreferrer" target="_blank">
               <FB_SVG color="rgb(66,103,178)" size="24" />
             </NavLink>
           </NavItem>
-          <NavItem >
+          {/* <NavItem >
             <NavLink style={{ paddingLeft: "8px", paddingRight: "8px" }} href="https://www.facebook.com/thefillapp" rel="noopener noreferrer" target="_blank">
               <FB_SVG_FEATHER color="rgb(66,103,178)" size="24" />
             </NavLink>
-          </NavItem>
+          </NavItem> */}
           <NavItem >
             <NavLink style={{ paddingLeft: "8px", paddingRight: "8px" }} href="https://www.instagram.com/christine_thefill/" rel="noopener noreferrer" target="_blank">
               <INSTAGRAM_SVG color="rgb(253,29,29)" size="24" />
             </NavLink>
           </NavItem>
-          <NavItem >
+          <NavItem>
+            <AuthWrapper>
+              <LoginButton /><LogoutButton />
+            </AuthWrapper>
+          </NavItem>
+          {/* <NavItem >
             <NavLink style={{ paddingLeft: "8px", paddingRight: "8px" }} href="https://www.instagram.com/christine_thefill/" rel="noopener noreferrer" target="_blank">
               <INSTAGRAM_SVG_FEATHER color="rgb(253,29,29)" size="24" />
             </NavLink>
-          </NavItem>
+          </NavItem> */}
         </Nav>
       </Collapse>
     </Navbar>
