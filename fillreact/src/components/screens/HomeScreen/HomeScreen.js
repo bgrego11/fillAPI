@@ -1,15 +1,16 @@
 import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
-import Card1 from './Card1';
+import { Col, Row, Spinner } from 'reactstrap';
 import HomeCarousel from './HomeCarousel';
-import ChristineImage from '../../../assets/Website-Selfie.png';
-
-
-import Card2 from './Card2';
-import Card3 from './Card3';
+import ChristineImage from '../../../assets/Website-Selfie3.png';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const HomeScreen = () => {
+  const { isLoading, error } = useAuth0();
+
   return (
+    // isLoading ?
+    //   <Spinner primary />
+    //   :
     // <Container>
     <>
       {/* <Row className="justify-content-center">
@@ -18,23 +19,24 @@ const HomeScreen = () => {
       <Row className="justify-content-center">
         <Col className="text-center" >To Make True Fulfillment a Lifestyle</Col>
       </Row> */}
-      <Row className="justify-content-center">
+      < Row className="justify-content-center" >
         <Col >
           <HomeCarousel />
         </Col>
+      </Row >
+      {/* <div className='divider' /> */}
+      <Row style={{ height: '15px' }}>
       </Row>
-      <Row>
-        <Col className="divider">
+      {/* <Row className="justify-content-center">
+        <Col xs="4" sm="4" md="4" lg="4" xl="4" className="text-center" > */}
+      {/* <Col xs="8" sm="8" md="6" lg="5" xl="4" className="text-center" > */}
+      {/* <img width="100%" src={ChristineImage} alt="" />
         </Col>
-      </Row>
-      <Row className="justify-content-center">
-        <Col xs="4" sm="4" md="4" lg="4" xl="4" className="text-center" >
-          {/* <Col xs="8" sm="8" md="6" lg="5" xl="4" className="text-center" > */}
-          <img width="100%" src={ChristineImage} alt="" />
-        </Col>
-      </Row>
+      </Row> */}
       <Row>
         <Col>
+          <img style={{ marginRight: '10px' }} width="35%" align="left" src={ChristineImage} alt="" />
+          {/* <span style={{ color: 'rgb(162, 81, 87)', textIndent: '30px' }}> */}
           <p style={{ textAlign: "center" }}><strong>If we haven’t met yet, I’m Christine!</strong></p>
 
           <p>While I love Jesus and consider it an honor to lead people to discover Him in the midst of their real lives, I have to be honest and say that I never considered myself a “Bible Study Girl.”</p>
@@ -55,16 +57,17 @@ const HomeScreen = () => {
 
           <p style={{ textAlign: "center" }}>With Love,</p>
           <p style={{ textAlign: "center" }}>Christine</p>
+          {/* </span> */}
         </Col>
       </Row>
-      <Row>
+      {/* <div className="divider" /> */}
+      <Row style={{ height: '15px' }}>
+      </Row>
+      {/* <Row>
         <Col className="divider">
         </Col>
-      </Row>
-      <Row className="justify-content-center">
-        {/* <Col xs="8" sm="8" md="6" lg="5" xl="4">
-          <Card1 />
-        </Col> */}
+      </Row> */}
+      {/* <Row className="justify-content-center">
         <Col xs="auto" lg="4">
           <Card1 />
         </Col>
@@ -84,7 +87,7 @@ const HomeScreen = () => {
       <Row>
         <Col className="divider">
         </Col>
-      </Row>
+      </Row> */}
     </>
 
     // </Container >

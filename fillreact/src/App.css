@@ -33,12 +33,52 @@
 .divider {
   height: 1px;
   width:100%;
-  display:block; /* for use on default inline elements like span */
-  margin: 9px 0;
+  /* display:block;  */
+  /* for use on default inline elements like span */
+  margin: 9px 0px;
+  padding: 0px;
   overflow: hidden;
   background-color: #e5e5e5;
 }
 
 body {
   padding-top: 120px;
+}
+
+/* .carousel-item > img { 
+  width: 100%; 
+} */
+
+.the-fill-nav-link {
+  color: rgb(240, 146, 164);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.the-fill-app-button {
+  border: 0 !important;
+  border-color: rgb(240, 146, 164) !important;
+  color: rgb(240, 146, 164) !important;
+  background-color: white !important;
+  margin: 2px;
+  /* background-color: paleturquoise !important; */
+  /* width: 150px; */
+}
+
+/* button,
+svg {
+  display: inline-block;
+  vertical-align: middle;
+} */
+
+p
+{
+  margin:0;
+  padding:0;
+  font-size: 14px;
+  color: rgb(162, 81, 87); 
+  /* text-indent: '30px'; */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  /* color: transparent;
+  text-shadow: 0 0 0px rgb(162, 81, 87); */
 }

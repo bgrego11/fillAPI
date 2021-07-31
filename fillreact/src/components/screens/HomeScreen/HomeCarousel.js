@@ -4,23 +4,31 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption
+  // CarouselCaption
 } from 'reactstrap';
+
+// import carouselImage1 from '../../../assets/homeCarousel1.png';
+// import carouselImage2 from '../../../assets/homeCarousel2.png';
+// import carouselImage3 from '../../../assets/homeCarousel3.png';
+
+import carouselImage1 from '../../../assets/roses1200x600.png';
+import carouselImage2 from '../../../assets/roses1200x600.png';
+import carouselImage3 from '../../../assets/roses1200x600.png';
 
 const items = [
   {
-    src: "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fthefill.org%2Fwp-content%2Fuploads%2F2020%2F01%2FCopy-of-Copy-of-Beauty.png",
-    altText: 'Slide 1',
+    src: carouselImage1,
+    // altText: 'Slide 1',
     // caption: 'Slide 1'
   },
   {
-    src: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fthefill.org%2Fwp-content%2Fuploads%2F2020%2F01%2FCopy-of-Copy-of-Beauty.png',
-    altText: 'Slide 2',
+    src: carouselImage2,
+    // altText: 'Slide 2',
     // caption: 'Slide 2'
   },
   {
-    src: 'https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fthefill.org%2Fwp-content%2Fuploads%2F2020%2F01%2FCopy-of-Copy-of-Beauty.png',
-    altText: 'Slide 3',
+    src: carouselImage3,
+    // altText: 'Slide 3',
     // caption: 'Slide 3'
   }
 ];
@@ -46,15 +54,17 @@ const HomeCarousel = (props) => {
     setActiveIndex(newIndex);
   }
 
-  const slides = items.map((item) => {
+  const slides = items.map((item, index) => { // added index for unique key, instead of image name, since it is possible to have duplicate image names.
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
-        key={item.src}
+        // key={item.src}
+        key={index}
       >
-        <img src={item.src} alt={item.altText} />
-        <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+        <img
+          width="100%" src={item.src} alt={item.altText} />
+        {/* <CarouselCaption captionText={item.caption} captionHeader={item.caption} /> */}
       </CarouselItem>
     );
   });
@@ -64,8 +74,9 @@ const HomeCarousel = (props) => {
       activeIndex={activeIndex}
       next={next}
       previous={previous}
+
     >
-      <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+      {/* <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} /> */}
       {slides}
       <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
       <CarouselControl direction="next" directionText="Next" onClickHandler={next} />

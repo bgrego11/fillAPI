@@ -1,4 +1,6 @@
 import React from 'react';
+import { Spinner } from 'reactstrap';
+
 import { useAuth0 } from '@auth0/auth0-react';
 function AuthWrapper({ children }) {
   const {
@@ -6,7 +8,7 @@ function AuthWrapper({ children }) {
     error,
   } = useAuth0();
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   if (error) {
     return <div>Oops... {error.message}</div>;
