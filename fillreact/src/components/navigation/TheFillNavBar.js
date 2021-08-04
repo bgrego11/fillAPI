@@ -10,13 +10,20 @@ import {
   NavLink,
   NavbarText,
   Container,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
+  Media,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import FB_SVG from '../../assets/FB_SVG';
-import INSTAGRAM_SVG from '../../assets/INSTAGRAM_SVG';
+import FB_SVG from '../../assets/svg/FB_SVG';
+import INSTAGRAM_SVG from '../../assets/svg/INSTAGRAM_SVG';
 import LoginInOutButton from '../login/LoginInOutButton';
+import LoginButton from '../login/LoginButton';
+import LogoutButton from '../login/LogoutButton';
 
-const NavBar = (props) => {
+const TheFillNavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -43,19 +50,38 @@ const NavBar = (props) => {
             <NavItem>
               <NavLink tag={Link} to="/donate"><span className="the-fill-nav-link">Donate</span></NavLink>
             </NavItem>
+
           </Nav>
           <Nav navbar>
 
             {
               isAuthenticated ?
-                <NavItem>
-                  <NavbarText style={{ paddingLeft: "8px", paddingRight: "8px", color: "rgb(162, 81, 87)" }}>{user.name}</NavbarText>
-                </NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    {/* <Media left href="#">
+                      <Media object data-src={user.picture} alt="Generic placeholder image" />
+                    </Media> */}
+                    <img style={{ width: "2rem", height: "2rem", borderRadius: "50%" }} src={user.picture} alt={user.name} />
+                    {/* {user.name} */}
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem tag={Link} to="/userprofile">
+                      profile
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+                // <NavItem>
+                //   <NavbarText style={{ paddingLeft: "8px", paddingRight: "8px", color: "rgb(162, 81, 87)" }}>{user.name}</NavbarText>
+                // </NavItem>
                 :
                 ""
             }
             <NavItem>
-              <LoginInOutButton />
+              {
+                (!isAuthenticated && <LoginButton />)
+                ||
+                (isAuthenticated && <LogoutButton />)
+              }
             </NavItem>
             <NavItem >
               <NavLink style={{ paddingLeft: "8px", paddingRight: "8px" }} href="https://www.facebook.com/thefillapp" rel="noopener noreferrer" target="_blank">
@@ -76,4 +102,4 @@ const NavBar = (props) => {
   );
 }
 
-export default NavBar;
+export default TheFillNavBar;

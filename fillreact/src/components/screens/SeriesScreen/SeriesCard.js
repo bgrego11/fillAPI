@@ -4,10 +4,10 @@ import {
   Card, CardImg, CardText, CardBody,
   CardTitle, Button, Row, Col
 } from 'reactstrap';
-import DELETE_TRASH_FEATHER_SVG from '../../../assets/DELETE_TRASH_FEATHER_SVG';
-import EDIT_FEATHER_SVG from '../../../assets/EDIT_FEATHER_SVG';
-import GOTO_FEATHER_SVG from '../../../assets/GOTO_FEATHER_SVG';
-import PLUS_ADD_FEATHER_SVG from '../../../assets/PLUS_ADD_FEATHER_SVG';
+import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_SVG';
+import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
+import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
+import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
 import EditSeriesModal from './EditSeriesModal';
 
 const SeriesCard = (props) => {
@@ -89,7 +89,7 @@ const SeriesCard = (props) => {
               </div>
             </div>
           </div>
-          <CardText className="seriesText">{props.seriesData.description}</CardText>
+          {/* <CardText className="seriesText">{props.seriesData.description}</CardText> */}
           {/* <Button className="the-fill-app-button" onClick={() => props.toggleScreen('story', props.seriesData.id)}>
             Add Stories
           </Button>
@@ -97,10 +97,12 @@ const SeriesCard = (props) => {
           <Button className="the-fill-app-button" onClick={handleDelete}>Delete</Button> */}
           <GOTO_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />
           <Button
-            tag={Link} to={`/seriesstories/${props.seriesData.id}`}
-            small outline className="the-fill-app-button">Go to stories
+            tag={Link} to={{
+              pathname: `/seriesstories/${props.seriesData.id}`,
+              state: props.seriesData,
+            }}
+            small='true' outline className="the-fill-app-button">Expand this series
           </Button>
-
         </CardBody>
       </Card>
       <EditSeriesModal id={props.seriesData.id} title={props.seriesData.title} img={props.seriesData.img} description={props.seriesData.description} likes={props.seriesData.likes} isOpen={modal} toggle={toggle} />

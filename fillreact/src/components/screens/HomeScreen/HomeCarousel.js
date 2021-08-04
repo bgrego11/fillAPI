@@ -11,9 +11,9 @@ import {
 // import carouselImage2 from '../../../assets/homeCarousel2.png';
 // import carouselImage3 from '../../../assets/homeCarousel3.png';
 
-import carouselImage1 from '../../../assets/roses1200x600.png';
-import carouselImage2 from '../../../assets/roses1200x600.png';
-import carouselImage3 from '../../../assets/roses1200x600.png';
+import carouselImage1 from '../../../assets/img/roses1200x600.png';
+import carouselImage2 from '../../../assets/img/roses1200x600.png';
+import carouselImage3 from '../../../assets/img/roses1200x600.png';
 
 const items = [
   {

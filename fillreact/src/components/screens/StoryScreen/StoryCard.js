@@ -3,56 +3,88 @@ import {
   Card, CardImg, CardText, CardBody,
   CardTitle, Button
 } from 'reactstrap';
+import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_SVG';
+import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
 import EditStoryModal from './EditStoryModal'
 
-const StoryCard = ({cardData, toggleScreen, sectionData}) => {
+const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
 
-const [modal, setModal] = useState(false);
-const toggle = () => {
-  console.log("i am working")
-  setModal(!modal);
-}
+  const [modal, setModal] = useState(false);
+  const toggle = () => {
+    // console.log("i am working")
+    setModal(!modal);
+  }
 
-const handleDelete = (event) => { 
+  const handleDelete = (event) => {
 
-  event.preventDefault();
-  const requestOptions = {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-};
-fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, requestOptions)
-.then(async response => {
-    const data = await response.json();
-    console.log(data);
-    // check for error response
-    if (!response.ok) {
-        // get error message from body or default to response status
-        const error = (data && data.message) || response.status;
-        return Promise.reject(error);    
-    }
-    
-})
-.catch(error => {
-  
-    console.error('There was an error!', error);
+    event.preventDefault();
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, requestOptions)
+      .then(async response => {
+        const data = await response.json();
+        // console.log("STORY INFO")
+        // console.log(data);
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response status
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);
+        }
 
-});
-};
+      })
+      .catch(error => {
+
+        console.error('There was an error!', error);
+
+      });
+  };
+
 
   return (
     <div className="space-bottom">
       <Card>
         <CardImg top width="100%" src={cardData.artwork} alt="Card image cap" />
         <CardBody>
-          <CardTitle tag="h5">{cardData && cardData.title}</CardTitle>
+
+          {/* <CardTitle tag="h5">{cardData && cardData.title}</CardTitle> */}
+
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div>
+              <CardTitle
+                style={{ color: 'rgb(162,81,87)' }}
+                tag="h5">
+                {cardData && cardData.title}
+              </CardTitle>
+            </div>
+            <div style={{ display: 'flex', verticalAlign: 'top' }}>
+              {/* <div onClick={() => props.toggleScreen('story', props.seriesData.id)}>
+                <PLUS_ADD_FEATHER_SVG
+                  size='20' color='rgb(250, 146, 164)' />
+              </div> */}
+              <div isOpen={modal} onClick={toggle}>
+                <EDIT_FEATHER_SVG
+                  size='20' color='rgb(250, 146, 164)' />
+              </div>
+              <div>
+                {/* <Button style={{ width: '22px', height: '22px' }}> */}
+                <DELETE_TRASH_FEATHER_SVG
+                  size='20' color='rgb(250, 146, 164)' />
+                {/* </Button> */}
+              </div>
+            </div>
+          </div>
+
           <CardText className="storyText">{cardData.description}</CardText>
           <CardText></CardText>
           {/* <Button onClick={() => toggleScreen('story', cardData.id)}>Add Stories</Button> */}
-          <Button isOpen={modal} onClick={toggle} >Edit</Button>
-          <Button onClick={handleDelete}>Delete</Button>
+          {/* <Button isOpen={modal} onClick={toggle} >Edit</Button>
+          <Button onClick={handleDelete}>Delete</Button> */}
         </CardBody>
       </Card>
-      <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} audioURL={cardData.url} toggle={toggle}  />
+      <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} audioURL={cardData.url} toggle={toggle} />
     </div>
   );
 };

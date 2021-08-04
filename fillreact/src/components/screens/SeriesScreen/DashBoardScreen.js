@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 
 // Components
 import SeriesScreen from './SeriesScreen';
-import StoryScreen from '../StoryScreen/StoryScreen';
+import StoryScreen from '../StoryScreen/StoryScreen_old';
 
 const DashBoardScreen = (props) => {
   const [screenType, setScreenType] = useState('Series');

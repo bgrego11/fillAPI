@@ -8,11 +8,9 @@ import {
 import SeriesCard from './SeriesCard'
 import NewSeriesModal from './NewSeriesModal'
 import { Link } from 'react-router-dom';
-import GOTO_FEATHER_SVG from '../../../assets/GOTO_FEATHER_SVG';
-import ARROW_LEFT_FEATHER_SVG from '../../../assets/ARROW_LEFT_FEATHER_SVG';
-import PLUS_ADD_FEATHER_SVG from '../../../assets/PLUS_ADD_FEATHER_SVG';
-
-
+// import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
+import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
+import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
 
 
 const SeriesScreen = ({ toggleScreen }) => {
