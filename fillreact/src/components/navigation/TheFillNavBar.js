@@ -8,18 +8,15 @@ import {
   Nav,
   NavItem,
   NavLink,
-  NavbarText,
   Container,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
   UncontrolledDropdown,
-  Media,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import FB_SVG from '../../assets/svg/FB_SVG';
 import INSTAGRAM_SVG from '../../assets/svg/INSTAGRAM_SVG';
-import LoginInOutButton from '../login/LoginInOutButton';
 import LoginButton from '../login/LoginButton';
 import LogoutButton from '../login/LogoutButton';
 
@@ -29,7 +26,7 @@ const TheFillNavBar = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     // <Navbar color="#fff" light expand="md">
@@ -58,21 +55,14 @@ const TheFillNavBar = (props) => {
               isAuthenticated ?
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
-                    {/* <Media left href="#">
-                      <Media object data-src={user.picture} alt="Generic placeholder image" />
-                    </Media> */}
-                    <img style={{ width: "2rem", height: "2rem", borderRadius: "50%" }} src={user.picture} alt={user.name} />
-                    {/* {user.name} */}
+                    <img style={{ width: "1rem", height: "1rem", borderRadius: "50%" }} src={user.picture} alt={user.name} />
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem tag={Link} to="/userprofile">
-                      profile
+                    <DropdownItem >
+                      <Link to='/userprofile' >profile</Link>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
-                // <NavItem>
-                //   <NavbarText style={{ paddingLeft: "8px", paddingRight: "8px", color: "rgb(162, 81, 87)" }}>{user.name}</NavbarText>
-                // </NavItem>
                 :
                 ""
             }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Card, CardImg, CardText, CardBody,
-  CardTitle, Button
+  Card, CardImg, CardText, CardBody, CardTitle
 } from 'reactstrap';
 import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_SVG';
 import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
@@ -11,7 +10,6 @@ const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
 
   const [modal, setModal] = useState(false);
   const toggle = () => {
-    // console.log("i am working")
     setModal(!modal);
   }
 
@@ -25,9 +23,6 @@ const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
     fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, requestOptions)
       .then(async response => {
         const data = await response.json();
-        // console.log("STORY INFO")
-        // console.log(data);
-        // check for error response
         if (!response.ok) {
           // get error message from body or default to response status
           const error = (data && data.message) || response.status;
@@ -36,9 +31,7 @@ const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
 
       })
       .catch(error => {
-
         console.error('There was an error!', error);
-
       });
   };
 
@@ -48,9 +41,6 @@ const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
       <Card>
         <CardImg top width="100%" src={cardData.artwork} alt="Card image cap" />
         <CardBody>
-
-          {/* <CardTitle tag="h5">{cardData && cardData.title}</CardTitle> */}
-
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div>
               <CardTitle

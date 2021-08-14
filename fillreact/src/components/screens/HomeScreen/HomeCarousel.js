@@ -3,7 +3,6 @@ import {
   Carousel,
   CarouselItem,
   CarouselControl,
-  CarouselIndicators,
   // CarouselCaption
 } from 'reactstrap';
 
@@ -11,14 +10,20 @@ import {
 // import carouselImage2 from '../../../assets/homeCarousel2.png';
 // import carouselImage3 from '../../../assets/homeCarousel3.png';
 
-import carouselImage1 from '../../../assets/img/roses1200x600.png';
-import carouselImage2 from '../../../assets/img/roses1200x600.png';
-import carouselImage3 from '../../../assets/img/roses1200x600.png';
+// import carouselImage1 from '../../../assets/img/roses1200x600.png';
+import carouselImage1 from '../../../assets/slider1.jpg'
+import carouselImage2 from '../../../assets/slider2.jpg';
+//import carouselImage3 from '../../../assets/slider2.jpg';
+import carouselImage4 from '../../../assets/slider4.jpg';
+//import carouselImage5 from '../../../assets/slider5.png';
+import carouselImage6 from '../../../assets/slider6.png';
+import carouselImage7 from '../../../assets/slider7.jpg';
+
 
 const items = [
   {
     src: carouselImage1,
-    // altText: 'Slide 1',
+    // altText: 'Slide 1', 
     // caption: 'Slide 1'
   },
   {
@@ -27,7 +32,17 @@ const items = [
     // caption: 'Slide 2'
   },
   {
-    src: carouselImage3,
+    src: carouselImage4,
+    // altText: 'Slide 3',
+    // caption: 'Slide 3'
+  },
+  {
+    src: carouselImage6,
+    // altText: 'Slide 3',
+    // caption: 'Slide 3'
+  },
+  {
+    src: carouselImage7,
     // altText: 'Slide 3',
     // caption: 'Slide 3'
   }
