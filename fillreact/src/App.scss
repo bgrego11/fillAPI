@@ -1,0 +1,134 @@
+
+.seriesText {
+    height: 5em;
+    overflow-x: scroll;
+}
+
+.seriesContainer {
+    padding: 20px 0;
+}
+
+.space-bottom {
+    padding-bottom: 20px;
+}
+
+.spinnerCenter {
+    text-align: center;
+}
+
+.storyText {
+    height: 10em;
+    overflow-x: scroll;
+}
+
+.addSection {
+    margin-top: 20px;
+}
+
+.cardModalTitle {
+    font-size: 24px;
+}
+
+/* Added by Ghassan */
+
+$footer-copyright-height: 30px;
+$navbar-height: 120px;
+
+
+.main-container {
+  min-height: calc(100vh - #{$navbar-height} - #{$footer-copyright-height});
+  // min-height: calc(100vh - 120px - 30px);
+}
+
+footer {
+  height: $footer-copyright-height;
+  background:rgb(162, 81, 87);
+  text-align: center;
+}
+
+footer p {
+  color: white;
+}
+
+.divider {
+  height: 1px;
+  width:100%;
+  /* display:block;  */
+  /* for use on default inline elements like span */
+  margin: 9px 0px;
+  padding: 0px;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+
+body {
+  padding-top: $navbar-height;
+}
+
+/* .carousel-item > img { 
+  width: 100%; 
+} */
+
+.the-fill-nav-link {
+  color: rgb(240, 146, 164);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.the-fill-app-button {
+  border: 0 !important;
+  border-color: rgb(240, 146, 164) !important;
+  color: rgb(240, 146, 164) !important;
+  background-color: white !important;
+  margin: 2px;
+  /* background-color: paleturquoise !important; */
+  /* width: 150px; */
+}
+
+/* button,
+svg {
+  display: inline-block;
+  vertical-align: middle;
+} */
+
+p
+{
+  margin:0;
+  padding:0;
+  font-size: 14px;
+  color: rgb(162, 81, 87); 
+  /* text-indent: '30px'; */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  /* color: transparent;
+  text-shadow: 0 0 0px rgb(162, 81, 87); */
+}
+
+.stripe-form-label {
+  color: rgb(240, 146, 164);
+  font-weight: 300;
+  letter-spacing: 0.025em;
+}
+
+input,
+.StripeElement {
+  display: block;
+  margin: 10px 0 20px 0;
+  max-width: 500px;
+  padding: 10px 14px;
+  font-size: 1em;
+  font-family: "Source Code Pro", monospace;
+  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
+    rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  background: white;
+}
+
+button:hover {
+  color: #fff;
+  cursor: pointer;
+  background-color: #7795f8;
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
