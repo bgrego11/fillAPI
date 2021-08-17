@@ -1,26 +1,23 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import {
-  Row, Col, Card, CardBody,
-  CardTitle, Button, Spinner
-} from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 
 // Components
 import SeriesCard from './SeriesCard'
 import NewSeriesModal from './NewSeriesModal'
 import { Link } from 'react-router-dom';
-import GOTO_FEATHER_SVG from '../../../assets/GOTO_FEATHER_SVG';
-import ARROW_LEFT_FEATHER_SVG from '../../../assets/ARROW_LEFT_FEATHER_SVG';
-import PLUS_ADD_FEATHER_SVG from '../../../assets/PLUS_ADD_FEATHER_SVG';
-
-
+// import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
+import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
+import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import ErrorScreen from '../../error/ErrorScreen';
 
 
 const SeriesScreen = ({ toggleScreen }) => {
   const [seriesData, setSeriesData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [err, setErr] = useState(null);
   const [modal, setModal] = useState(false);
   const toggle = () => {
-    console.log("i am working")
     setModal(!modal);
   }
 
@@ -38,18 +35,25 @@ const SeriesScreen = ({ toggleScreen }) => {
       );
       let newData = await res.json();
       setSeriesData(newData);
-      setLoading(false)
-    } catch {
-      setLoading(false)
+      setIsLoaded(true)
+    } catch (err) {
+      setErr(err);
+      setIsLoaded(true);
     }
   };
-  return (
-    <Fragment>
-      {loading ?
-        <div className="spinnerCenter">
-          <Spinner type="grow" style={{ width: '5rem', height: '5rem', color: "#f092a4" }} />
-        </div>
-        :
+
+  if (err) {
+    return <ErrorScreen error={err} />
+  }
+  else if (!isLoaded) {
+    return <LoadingScreen />
+  }
+  else {
+    return (
+      <Fragment>
+        {/* {!isLoaded ? */}
+        {/* <LoadingScreen /> */}
+        {/* : */}
         <div>
           <Row>
             <Col>
@@ -95,9 +99,10 @@ const SeriesScreen = ({ toggleScreen }) => {
           </Row>
           <NewSeriesModal isOpen={modal} toggle={toggle} />
         </div>
-      }
-    </Fragment>
-  );
+
+      </Fragment>
+    );
+  }
 }
 
 export default SeriesScreen;

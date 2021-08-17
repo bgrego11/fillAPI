@@ -1,11 +1,11 @@
 import React from 'react';
-import { Col, Row, Spinner } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import HomeCarousel from './HomeCarousel';
-import ChristineImage from '../../../assets/Website-Selfie3.png';
-import { useAuth0 } from '@auth0/auth0-react';
+import ChristineImage from '../../../assets/img/Website-Selfie3.png';
+// import { useAuth0 } from '@auth0/auth0-react';
 
 const HomeScreen = () => {
-  const { isLoading, error } = useAuth0();
+  // const { isLoading, error } = useAuth0();
 
   return (
     // isLoading ?

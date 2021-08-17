@@ -8,21 +8,25 @@ import {
   Nav,
   NavItem,
   NavLink,
-  NavbarText,
   Container,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import FB_SVG from '../../assets/FB_SVG';
-import INSTAGRAM_SVG from '../../assets/INSTAGRAM_SVG';
-import LoginInOutButton from '../login/LoginInOutButton';
+import FB_SVG from '../../assets/svg/FB_SVG';
+import INSTAGRAM_SVG from '../../assets/svg/INSTAGRAM_SVG';
+import LoginButton from '../login/LoginButton';
+import LogoutButton from '../login/LogoutButton';
 
-const NavBar = (props) => {
+const TheFillNavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
 
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     // <Navbar color="#fff" light expand="md">
@@ -43,19 +47,31 @@ const NavBar = (props) => {
             <NavItem>
               <NavLink tag={Link} to="/donate"><span className="the-fill-nav-link">Donate</span></NavLink>
             </NavItem>
+
           </Nav>
           <Nav navbar>
 
             {
               isAuthenticated ?
-                <NavItem>
-                  <NavbarText style={{ paddingLeft: "8px", paddingRight: "8px", color: "rgb(162, 81, 87)" }}>{user.name}</NavbarText>
-                </NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    <img style={{ width: "1rem", height: "1rem", borderRadius: "50%" }} src={user.picture} alt={user.name} />
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem >
+                      <Link to='/userprofile' >profile</Link>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
                 :
                 ""
             }
             <NavItem>
-              <LoginInOutButton />
+              {
+                (!isAuthenticated && <LoginButton />)
+                ||
+                (isAuthenticated && <LogoutButton />)
+              }
             </NavItem>
             <NavItem >
               <NavLink style={{ paddingLeft: "8px", paddingRight: "8px" }} href="https://www.facebook.com/thefillapp" rel="noopener noreferrer" target="_blank">
@@ -76,4 +92,4 @@ const NavBar = (props) => {
   );
 }
 
-export default NavBar;
+export default TheFillNavBar;

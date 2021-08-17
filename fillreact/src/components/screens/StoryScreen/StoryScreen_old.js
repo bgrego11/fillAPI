@@ -5,17 +5,15 @@ import {
 } from 'reactstrap';
 
 // Components
-import StoryCard from '../StoryScreen/StoryCard'
-import NewStoryModal from '../StoryScreen/NewStoryModal'
+import StoryCard from './StoryCard'
+import NewStoryModal from './NewStoryModal'
 
 
 
-const AllStoriesScreen = (props) => {
-  const [storiesData, setStoriesData] = useState([]);
+const StoryScreen = ({ seriesID, sectionData }) => {
+  const [seriesData, setSeriesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newModal, setNewModal] = useState(false);
-
-  // const seriesID = props.match.params.seriesId;
 
   const newModaltoggle = () => {
     setNewModal(!newModal);
@@ -23,18 +21,17 @@ const AllStoriesScreen = (props) => {
 
   useEffect(() => {
     fetchStoryData();
-  }, []);
+  }, [seriesID, sectionData]);
 
   const fetchStoryData = async () => {
-    let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/story/`, {
+    let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/series/${seriesID}`, {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': 'http://localhost:3000',
     }
     );
-    let rawStoriesData = await res.json();
-    console.log(rawStoriesData);
-    setStoriesData(rawStoriesData);
+    let seriesData = await res.json();
+    setSeriesData(seriesData.stories);
     setLoading(false)
   };
 
@@ -45,7 +42,7 @@ const AllStoriesScreen = (props) => {
 
   return (
     <div className="seriesContainer">
-      <Button onClick={handleScreen}>Back to Home</Button>
+      <Button onClick={handleScreen}>Back to Series</Button>
       {loading ?
         <div className="spinnerCenter">
           <Spinner type="grow" style={{ width: '5rem', height: '5rem', color: "#f092a4" }} />
@@ -53,27 +50,24 @@ const AllStoriesScreen = (props) => {
         :
         <div className="seriesContainer">
           <Row>
-            {storiesData && storiesData.map((story, index) => {
-              return <Col key={index} xs="12" sm="4">
-                <StoryCard
-                  // sectionData={sectionData}
-                  cardData={story} /></Col>
+            {seriesData && seriesData.map((story, index) => {
+              return <Col key={index} xs="12" sm="4"><StoryCard sectionData={sectionData} cardData={story} /></Col>
             })
             }
-            {/* <Col xs="12" sm="4">
+            <Col xs="12" sm="4">
               <Card>
                 <CardBody>
-                  <CardTitle tag="h3">Add New Story ??</CardTitle>
+                  <CardTitle tag="h3">Add New Story</CardTitle>
                   <Button onClick={newModaltoggle}>Click to Add</Button>
                 </CardBody>
               </Card>
-            </Col> */}
+            </Col>
           </Row>
-          {/* <NewStoryModal isOpen={newModal} seriesID={seriesID} toggle={newModaltoggle} /> */}
+          <NewStoryModal isOpen={newModal} seriesID={seriesID} toggle={newModaltoggle} />
         </div>
       }
     </div>
   );
 }
 
-export default AllStoriesScreen;
+export default StoryScreen;

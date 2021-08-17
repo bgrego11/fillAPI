@@ -20,5 +20,5 @@ module.exports = app => {
     // // Delete all st_tag
     // router.delete("/", st_tag.deleteAll);
   
-    app.use('/api/st_tag', router);
+    app.use('/api/storytag', router);
   };

@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('mysql://ben:hotdogboy79@thefill.c4dakz7il1rp.us-east-2.rds.amazonaws.com:3306/thefilldb');
+// const sequelize = new Sequelize('mysql://ben:hotdogboy79@thefill.c4dakz7il1rp.us-east-2.rds.amazonaws.com:3306/thefilldb');
+
+const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
 
 
 const db = {};
@@ -16,35 +18,35 @@ db.st_tag = require("./st_tag.model.js")(sequelize, Sequelize);
 db.carousel = require("./carousel.model.js")(sequelize, Sequelize);
 
 db.series.hasMany(db.story, {
-    foreignKey: {
-      name: 'series_id',
-      allowNull: false
-    }
-  })
+  foreignKey: {
+    name: 'series_id',
+    allowNull: false
+  }
+})
 
 
 db.story.hasMany(db.userprogress, {
-    foreignKey: {
-        name: 'story_id',
-        allowNull: false
-      }
+  foreignKey: {
+    name: 'story_id',
+    allowNull: false
+  }
 
 })
 
 db.story.hasMany(db.st_tag, {
-    foreignKey: {
-        name: 'story_id',
-        allowNull: false
-      }
+  foreignKey: {
+    name: 'story_id',
+    allowNull: false
+  }
 
 })
 
 db.story.hasMany(db.section, {
-    foreignKey: {
-        name: 'story_id',
-        allowNull: false
-      }
+  foreignKey: {
+    name: 'story_id',
+    allowNull: false
+  }
 
 })
 
-  module.exports = db;
+module.exports = db;
