@@ -91,8 +91,8 @@ const CheckoutForm = () => {
   );
 };
 
-const stripePromise = loadStripe(`${process.env.STRIPE_KEY}`);
-console.log("STRIPE KEY: " + process.env.STRIPE_KEY);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
+// console.log("STRIPE KEY: " + process.env.STRIPE_KEY);
 
 const DonateScreen = () => (
   // <div style={{ paddingTop: '100px' }}>
