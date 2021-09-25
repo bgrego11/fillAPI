@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'reactstrap';
 
 // Components
-import SeriesScreen from './SeriesScreen';
+import DashboardSeriesScreen from '../DashBoardScreen/Dashboard';
 import StoryScreen from '../StoryScreen/StoryScreen_old';
 
 const DashBoardScreen = (props) => {
@@ -31,7 +31,7 @@ const DashBoardScreen = (props) => {
 
   return (
     <Container className="seriesContainer">
-      {screenType === 'Series' ? <SeriesScreen toggleScreen={toggleScreen} /> : <StoryScreen sectionData={sectionData} seriesID={seriesID} />}
+      {screenType === 'Series' ? <DashboardSeriesScreen toggleScreen={toggleScreen} /> : <StoryScreen sectionData={sectionData} seriesID={seriesID} />}
     </Container>
   );
 }

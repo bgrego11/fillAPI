@@ -19,25 +19,24 @@ const StoryScreen = ({ seriesID, sectionData }) => {
     setNewModal(!newModal);
   }
 
+
   useEffect(() => {
+    const fetchStoryData = async () => {
+      let res = await fetch(`https://thefill.herokuapp.com/api/series/${seriesID}`, {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+      );
+      let seriesData = await res.json();
+      setSeriesData(seriesData.stories);
+      setLoading(false)
+    };
     fetchStoryData();
   }, [seriesID, sectionData]);
 
-  const fetchStoryData = async () => {
-    let res = await fetch(`https://thefill.herokuapp.com/api/series/${seriesID}`, {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:3000',
-    }
-    );
-    let seriesData = await res.json();
-    setSeriesData(seriesData.stories);
-    setLoading(false)
-  };
-
 
   const handleScreen = () => {
-    window.location = '/'
+    window.location = '/editDashboard'
   }
 
   return (

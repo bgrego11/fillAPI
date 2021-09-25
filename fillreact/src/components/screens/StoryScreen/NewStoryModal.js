@@ -51,7 +51,6 @@ const NewStoryModal = (props) => {
   fetch('https://thefill.herokuapp.com/api/story', requestOptions)
   .then(async response => {
       const data = await response.json();
-      console.log(data);
       props.toggle();
       // check for error response
       if (!response.ok) {

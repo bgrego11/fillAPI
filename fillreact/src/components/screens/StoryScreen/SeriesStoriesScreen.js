@@ -1,8 +1,3 @@
-
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import {
   Row, Col, Button, ListGroup, ListGroupItem, Container
@@ -32,26 +27,26 @@ const SeriesStoriesScreen = (props) => {
   }
 
   useEffect(() => {
-    fetchStoryData();
-  }, []);
-
-  const fetchStoryData = async () => {
-    try {
-      let res = await fetch(`https://thefill.herokuapp.com/api/series/${seriesID}`, {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
+    const fetchStoryData = async () => {
+      try {
+        let res = await fetch(`https://thefill.herokuapp.com/api/series/${seriesID}`, {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:3000',
+        }
+        );
+        let seriesData = await res.json();
+        setSeriesStories(seriesData.stories);
+        setIsLoaded(true);
       }
-      );
-      let seriesData = await res.json();
-      setSeriesStories(seriesData.stories);
-      setIsLoaded(true);
-    }
-    catch (error) {
-      setErr(error);
-      setIsLoaded(true);
-    }
-  };
+      catch (error) {
+        setErr(error);
+        setIsLoaded(true);
+      }
+    };
+
+    fetchStoryData();
+  }, [seriesID]);
 
 
   if (err) {
@@ -77,17 +72,6 @@ const SeriesStoriesScreen = (props) => {
                 </Button>
               </div>
               {/* <div style={{ display: 'flex' }}> */}
-              <div>
-                <Button
-                  style={{
-                    display: 'inline-flex', alignItems: 'center'
-                  }}
-                  small outline className="the-fill-app-button"
-                  onClick={newModaltoggle}
-                > <PLUS_ADD_FEATHER_SVG
-                    size='20' color='rgb(250, 146, 164)' />Add New Story
-                </Button>
-              </div>
             </div>
           </Col>
         </Row>

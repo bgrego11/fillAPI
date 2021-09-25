@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { get } from 'lodash';
 import {
   Collapse,
   Navbar,
@@ -27,6 +28,8 @@ const TheFillNavBar = (props) => {
 
 
   const { user, isAuthenticated } = useAuth0();
+  const userFallback = get(user, 'email', '');
+  console.log(userFallback)
 
   return (
     // <Navbar color="#fff" light expand="md">
@@ -47,6 +50,11 @@ const TheFillNavBar = (props) => {
             <NavItem>
               <NavLink tag={Link} to="/donate"><span className="the-fill-nav-link">Donate</span></NavLink>
             </NavItem>
+            { (userFallback === 'steve@steve.com' || userFallback === 'christinelekovich@gmail.com' || userFallback === 'sts12589@gmail.com') &&
+            <NavItem>
+              <NavLink tag={Link} to="/editdashboard"><span className="the-fill-nav-link">Dashboard</span></NavLink>
+            </NavItem>
+            }
 
           </Nav>
           <Nav navbar>
@@ -54,14 +62,14 @@ const TheFillNavBar = (props) => {
             {
               isAuthenticated ?
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
+                  <DropdownToggle nav>
                     <img style={{ width: "1rem", height: "1rem", borderRadius: "50%" }} src={user.picture} alt={user.name} />
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  {/* <DropdownMenu right>
                     <DropdownItem >
                       <Link to='/userprofile' >profile</Link>
                     </DropdownItem>
-                  </DropdownMenu>
+                  </DropdownMenu> */}
                 </UncontrolledDropdown>
                 :
                 ""

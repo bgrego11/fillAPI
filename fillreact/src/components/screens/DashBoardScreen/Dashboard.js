@@ -2,8 +2,8 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
 
 // Components
-import SeriesCard from './SeriesCard'
-import NewSeriesModal from '../DashBoardScreen/NewSeriesModal'
+import DashBoardSeriesCard from './DashboardSeriesCard'
+import NewSeriesModal from './NewSeriesModal'
 import { Link } from 'react-router-dom';
 // import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
 import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
@@ -12,7 +12,7 @@ import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import ErrorScreen from '../../error/ErrorScreen';
 
 
-const SeriesScreen = ({ toggleScreen }) => {
+const DashboardSeriesScreen = ({ toggleScreen }) => {
   const [seriesData, setSeriesData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [err, setErr] = useState(null);
@@ -85,7 +85,7 @@ const SeriesScreen = ({ toggleScreen }) => {
           </Row>
           <Row>
             {seriesData.map((series, index) => {
-              return <Col key={index} xs="12" sm="6"><SeriesCard toggleScreen={toggleScreen} seriesData={series} /></Col>
+              return <Col key={index} xs="12" sm="6"><DashBoardSeriesCard toggleScreen={toggleScreen} seriesData={series} /></Col>
             })
             }
             {/* <Col xs="12" sm="6">
@@ -105,4 +105,4 @@ const SeriesScreen = ({ toggleScreen }) => {
   }
 }
 
-export default SeriesScreen;
+export default DashboardSeriesScreen;

@@ -6,6 +6,7 @@ import DonateScreen from './components/screens/DonateScreen/DonateScreen';
 import { Switch, Route } from 'react-router-dom';
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 import { Container } from 'reactstrap';
+import DashBoardScreen from './components/screens/SeriesScreen/DashBoardScreen_old';
 import SeriesStoriesScreen from './components/screens/StoryScreen/SeriesStoriesScreen';
 import AllStoriesScreen from './components/screens/StoryScreen/AllStoriesScreen';
 import SeriesScreen from './components/screens/SeriesScreen/SeriesScreen';
@@ -50,6 +51,7 @@ function App() {
                   {/* <ProtectedRoute path="/userprofile" component={UserProfileScreen} /> */}
                   <ProtectedRoute path="/singlestory" component={StoryScreen} />
                   <ProtectedRoute path="/userprofile" component={Profile} />
+                  <ProtectedRoute path="/editdashboard" component={DashBoardScreen} />
                   <Route path="/error" component={ErrorScreen} />
                 </Switch>
               </main>

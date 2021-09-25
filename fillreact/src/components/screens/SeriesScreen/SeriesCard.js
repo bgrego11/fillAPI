@@ -6,10 +6,10 @@ import {
 import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
 
 
-import EditSeriesModal from './EditSeriesModal';
-import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_SVG';
-import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
-import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
+import EditSeriesModal from '../DashBoardScreen/EditSeriesModal';
+// import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_SVG';
+// import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
+// import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
 
 
 
@@ -20,28 +20,6 @@ const SeriesCard = (props) => {
     setModal(!modal);
   }
 
-  const handleDelete = (event) => {
-
-    event.preventDefault();
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    fetch(`https://thefill.herokuapp.com/api/series/${props.seriesData.id}`, requestOptions)
-      .then(async response => {
-        const data = await response.json();
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = (data && data.message) || response.status;
-          return Promise.reject(error);
-        }
-
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      });
-  };
 
   return (
     <div className="space-bottom">
@@ -57,7 +35,7 @@ const SeriesCard = (props) => {
               </CardTitle>
             </div>
             {/* Admin Section begin */}
-            <div style={{ display: 'flex', verticalAlign: 'top' }}>
+            {/* <div style={{ display: 'flex', verticalAlign: 'top' }}>
               <div onClick={() => props.toggleScreen('story', props.seriesData.id)}>
                 <PLUS_ADD_FEATHER_SVG
                   size='20' color='rgb(250, 146, 164)' />
@@ -70,7 +48,7 @@ const SeriesCard = (props) => {
                 <DELETE_TRASH_FEATHER_SVG
                   size='20' color='rgb(250, 146, 164)' />
               </div>
-            </div>
+            </div> */}
             {/* Admin Section end */}
           </div>
 
@@ -80,7 +58,7 @@ const SeriesCard = (props) => {
               pathname: `/seriesstories/${props.seriesData.id}`,
               state: props.seriesData,
             }}
-            small outline className="the-fill-app-button">Expand this series
+            small outline className="the-fill-app-button">Go to series
           </Button>
         </CardBody>
       </Card>

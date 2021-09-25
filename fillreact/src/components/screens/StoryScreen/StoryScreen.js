@@ -98,16 +98,23 @@ const StoryScreen = (props) => {
             <div><p>{cardData.description}</p></div>
           </Col>
           <Col xs='12' sm='6'>
-            <ReactPlayer width='100%' height='100%' controls='true' url={cardData.url} />
-          </Col>
-        </Row>
-        {
+          {
           sectionData && sectionData.map((section, index) => {
-            return (
-              section.story_id === cardData.id ? <div key={index}><p>{section.title}</p></div> : ""
-            )
+            console.log(section)
+            if (section.story_id === cardData.id) {
+              return (
+                <div key={index}>
+                  <h3>{section.title}</h3>
+                  <h4>{section.sub_title}</h4>
+                  <p>{section.text}</p>
+                </div>
+              )
+            }
           })
         }
+            <ReactPlayer width='100%' controls='true' url={cardData.url} />
+          </Col>
+        </Row>
 
         <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} audioURL={cardData.url} toggle={toggle} />
       </div >

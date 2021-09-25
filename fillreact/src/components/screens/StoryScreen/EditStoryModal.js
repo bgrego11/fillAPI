@@ -159,6 +159,31 @@ fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
 });
 };
 
+const handleDeleteSection = (sectionId) => { 
+
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+};
+fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
+.then(async response => {
+    const data = await response.json();
+    console.log(data);
+    props.toggle();
+    // check for error response
+    if (!response.ok) {
+        // get error message from body or default to response status
+        const error = (data && data.message) || response.status;
+        return Promise.reject(error);    
+    }
+})
+.catch(error => {
+  
+    console.error('There was an error!', error);
+
+});
+};
+
       useEffect(() => {
         setModal(props.isOpen)
         setTitle(props.title);
@@ -209,7 +234,7 @@ fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
                         <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" onChange={handleEditSectionSubTitle}  defaultValue={section.sub_title} />
                         <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" onChange={handleEditSectionText} defaultValue={section.text} />
                         <Button onClick={() => handleEditSection(section.id)} >Save Edited Section</Button>
-                        <Button >Delete Section</Button>
+                        <Button onClick={() => handleDeleteSection(section.id)}>Delete Section</Button>
                       </div>
                     )
                   })
