@@ -48,7 +48,7 @@ const NewStoryModal = (props) => {
         series_id: props.seriesID,
        })
   };
-  fetch('https://evening-springs-63282.herokuapp.com/api/story', requestOptions)
+  fetch('https://thefill.herokuapp.com/api/story', requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);

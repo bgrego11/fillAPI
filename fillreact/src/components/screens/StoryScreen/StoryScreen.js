@@ -29,7 +29,7 @@ const StoryScreen = (props) => {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     };
-    fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, requestOptions)
+    fetch(`https://thefill.herokuapp.com/api/story/${cardData.id}`, requestOptions)
       .then(async response => {
         const data = await response.json();
         // check for error response
@@ -47,10 +47,9 @@ const StoryScreen = (props) => {
 
   const fetchSectionData = async () => {
     try {
-      let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/section`, {
+      let res = await fetch(`https://thefill.herokuapp.com/api/section`, {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
       }
       );
       let data = await res.json();

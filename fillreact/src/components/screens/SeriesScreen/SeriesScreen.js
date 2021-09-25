@@ -27,7 +27,7 @@ const SeriesScreen = ({ toggleScreen }) => {
 
   const fetchSeriesData = async () => {
     try {
-      let res = await fetch('https://evening-springs-63282.herokuapp.com/api/series', {
+      let res = await fetch('https://thefill.herokuapp.com/api/series', {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:3000',

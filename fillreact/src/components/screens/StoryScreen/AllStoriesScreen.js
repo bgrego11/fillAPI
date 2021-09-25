@@ -28,10 +28,9 @@ const SeriesStoriesScreen = (props) => {
 
   const fetchStoryData = async () => {
     try {
-      let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/story/`, {
+      let res = await fetch(`https://thefill.herokuapp.com/api/story/`, {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
       }
       );
       let rawStoriesData = await res.json();

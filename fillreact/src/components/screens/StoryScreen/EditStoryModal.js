@@ -76,7 +76,7 @@ const EditStoryModal = (props) => {
         "story_id": `${props.id}`
        })
   };
-  fetch('https://evening-springs-63282.herokuapp.com/api/section', requestOptions)
+  fetch('https://thefill.herokuapp.com/api/section', requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);
@@ -110,7 +110,7 @@ const EditStoryModal = (props) => {
         url: audioURL,
        })
   };
-  fetch(`https://evening-springs-63282.herokuapp.com/api/story/${props.id}`, requestOptions)
+  fetch(`https://thefill.herokuapp.com/api/story/${props.id}`, requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);
@@ -140,7 +140,7 @@ const handleEditSection = (sectionId) => {
       "text": editSectionText,
      })
 };
-fetch(`https://evening-springs-63282.herokuapp.com/api/section/${sectionId}`, requestOptions)
+fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
 .then(async response => {
     const data = await response.json();
     console.log(data);
@@ -171,10 +171,9 @@ fetch(`https://evening-springs-63282.herokuapp.com/api/section/${sectionId}`, re
       }, [ props.isOpen, props.title, props.description, props.img, props.storyDuration ]);
 
     const fetchSectionData = async () => {
-      let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/story/${props.id}`, {
+      let res = await fetch(`https://thefill.herokuapp.com/api/story/${props.id}`, {
           'Content-Type':'application/json',
           'Accept': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:3000',
       }
       );
       let section = await res.json();

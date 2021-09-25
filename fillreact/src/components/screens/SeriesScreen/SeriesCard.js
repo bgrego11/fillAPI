@@ -27,7 +27,7 @@ const SeriesCard = (props) => {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     };
-    fetch(`https://evening-springs-63282.herokuapp.com/api/series/${props.seriesData.id}`, requestOptions)
+    fetch(`https://thefill.herokuapp.com/api/series/${props.seriesData.id}`, requestOptions)
       .then(async response => {
         const data = await response.json();
         // check for error response

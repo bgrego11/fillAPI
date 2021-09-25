@@ -36,7 +36,7 @@ const NewSeriesModal = (props) => {
         "likes": 0
        })
   };
-  fetch('https://evening-springs-63282.herokuapp.com/api/series', requestOptions)
+  fetch('https://thefill.herokuapp.com/api/series', requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);

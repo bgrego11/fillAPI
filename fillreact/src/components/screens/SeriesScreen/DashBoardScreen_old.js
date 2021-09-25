@@ -15,10 +15,9 @@ const DashBoardScreen = (props) => {
   }
 
   const fetchSectionData = async () => {
-    let res = await fetch(`https://evening-springs-63282.herokuapp.com/api/section`, {
+    let res = await fetch(`https://thefill.herokuapp.com/api/section`, {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Access-Control-Allow-Origin': 'http://localhost:3000',
     }
     );
     let sectionData = await res.json();

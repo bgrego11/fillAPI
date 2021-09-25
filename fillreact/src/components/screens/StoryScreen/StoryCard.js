@@ -20,7 +20,7 @@ const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     };
-    fetch(`https://evening-springs-63282.herokuapp.com/api/story/${cardData.id}`, requestOptions)
+    fetch(`https://thefill.herokuapp.com/api/story/${cardData.id}`, requestOptions)
       .then(async response => {
         const data = await response.json();
         if (!response.ok) {
