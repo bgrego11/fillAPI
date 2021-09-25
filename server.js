@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/fillreact/build', 'index.html'))
 })
 
+require("./app/routes/st_tag.routes")(app);
 require("./app/routes/series.routes")(app);
 require("./app/routes/story.routes")(app);
 require("./app/routes/section.routes")(app);
