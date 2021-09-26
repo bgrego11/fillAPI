@@ -80,7 +80,7 @@ const SeriesCard = (props) => {
               pathname: `/seriesstories/${props.seriesData.id}`,
               state: props.seriesData,
             }}
-            small outline className="the-fill-app-button">Expand this series
+            className="the-fill-app-button">Expand this series
           </Button>
         </CardBody>
       </Card>

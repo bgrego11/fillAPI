@@ -115,7 +115,7 @@ const SeriesStoriesScreen = (props) => {
                     state: story,
                   }}>
                     <img width='30rem' height='30rem' src={story.artwork} alt={story.title} />
-                    <Button small outline className="the-fill-app-button">
+                    <Button className="the-fill-app-button">
                       {story.title}
                     </Button>
                   </ListGroupItem>

@@ -3,6 +3,7 @@ import './App.scss';
 import TheFillNavBar from './components/navigation/TheFillNavBar';
 import Home from './components/screens/HomeScreen/HomeScreen';
 import DonateScreen from './components/screens/DonateScreen/DonateScreen';
+import DonateCheckoutScreen from './components/screens/DonateScreen/DonateCheckoutScreen';
 import { Switch, Route } from 'react-router-dom';
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 import { Container } from 'reactstrap';
@@ -43,6 +44,7 @@ function App() {
                 <Switch >
                   <Route exact path="/" component={Home} />
                   <ProtectedRoute path="/serieslist" component={SeriesScreen} />
+                  <ProtectedRoute path="/donatecheckout" component={DonateCheckoutScreen} />
                   <ProtectedRoute path="/donate" component={DonateScreen} />
                   {/* <ProtectedRoute path="/allseriesstories" component={FillSistersScreen} /> */}
                   <ProtectedRoute path="/seriesstories/:seriesID" component={SeriesStoriesScreen} />

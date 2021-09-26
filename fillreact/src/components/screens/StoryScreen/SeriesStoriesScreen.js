@@ -72,8 +72,9 @@ const SeriesStoriesScreen = (props) => {
                   style={{
                     display: 'inline-flex', alignItems: 'center'
                   }}
-                  tag={Link} to="/serieslist"
-                  small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Back to all series
+                  tag={Link}
+                  to="/serieslist"
+                  className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Back to all series
                 </Button>
               </div>
               {/* <div style={{ display: 'flex' }}> */}
@@ -82,7 +83,7 @@ const SeriesStoriesScreen = (props) => {
                   style={{
                     display: 'inline-flex', alignItems: 'center'
                   }}
-                  small outline className="the-fill-app-button"
+                  className="the-fill-app-button"
                   onClick={newModaltoggle}
                 > <PLUS_ADD_FEATHER_SVG
                     size='20' color='rgb(250, 146, 164)' />Add New Story
@@ -120,7 +121,7 @@ const SeriesStoriesScreen = (props) => {
                     state: story,
                   }}>
                     <img width='30rem' height='30rem' src={story.artwork} alt={story.title} />
-                    <Button small outline className="the-fill-app-button">
+                    <Button className="the-fill-app-button">
                       {story.title}
                     </Button>
                   </ListGroupItem>
