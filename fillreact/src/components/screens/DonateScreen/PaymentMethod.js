@@ -9,21 +9,31 @@ const PaymentMethod = (props) => {
   // const seriesData = props.location.state;
 
   let paymentMethod = props.match.params.paymentMethod;
-  let donationAmount = props.location.state;
+  let donationAmount = props.location.state.donationAmount;
+  let donationEmail = props.location.state.donationEmail;
+  let donationfirstName = props.location.state.firstName;
+
   //let params = useParams();
   // let { paymentMethod } = useParams();
   // console.log("PAYMENT METHOD");
   // console.log();
 
+  console.log("IN PAYMENT METHOD: " + donationEmail)
+
   return (
-    <div>
+
+
+    < div >
       {
         paymentMethod === 'electronicpayment'
-          ? <DonateCheckoutScreen donationAmount={donationAmount} />
+          ? <DonateCheckoutScreen
+            donationAmount={donationAmount}
+            donationEmail={donationEmail}
+          />
           : <DonateOfflineScreen donationAmount={donationAmount} />
       }
 
-    </div>
+    </div >
   )
 
 }

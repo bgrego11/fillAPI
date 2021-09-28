@@ -70,9 +70,24 @@ body {
 } */
 
 
-.the-fill-radio-text {
+.the-fill-text-dark {
   color: rgb(162, 81, 87);
   font-family: 'Open Sans', sans-serif;
+}
+
+.the-fill-text-light {
+  color: rgb(240, 146, 164);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.the-fill-form-heading {
+  color: rgb(240, 146, 164);
+  font-size: 14px;
+}
+
+.the-fill-form-legend {
+  // font-size: '17px';
+  color: rgba(162, 81, 87, .8);
 }
 
 .the-fill-nav-link {
@@ -86,6 +101,17 @@ body {
   color: rgb(240, 146, 164) !important;
   background-color: white !important;
   margin: 2px;
+  /* background-color: paleturquoise !important; */
+  /* width: 150px; */
+}
+
+.the-fill-stripe-button {
+  border: 1 !important;
+  border-color: rgb(240, 146, 164) !important;
+  color: rgb(240, 146, 164) !important;
+  background-color: white !important;
+  margin: 2px;
+  width: 100%;
   /* background-color: paleturquoise !important; */
   /* width: 150px; */
 }

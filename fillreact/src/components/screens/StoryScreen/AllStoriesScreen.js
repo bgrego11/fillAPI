@@ -67,7 +67,9 @@ const SeriesStoriesScreen = (props) => {
                     display: 'inline-flex', alignItems: 'center'
                   }}
                   tag={Link} to="/"
-                  small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
+                  className="the-fill-app-button" >
+                  <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />
+                  Home
                 </Button>
               </div>
               {/* <div style={{ display: 'flex' }}> */}
@@ -106,7 +108,7 @@ const SeriesStoriesScreen = (props) => {
             </Col>
           </Row> */}
         <Row>
-          <Container>
+          <Col md={6}>
             <ListGroup>
               {storiesData && storiesData.map((story, index) => {
                 return (
@@ -114,16 +116,18 @@ const SeriesStoriesScreen = (props) => {
                     pathname: '/singlestory',
                     state: story,
                   }}>
-                    <img width='30rem' height='30rem' src={story.artwork} alt={story.title} />
-                    <Button className="the-fill-app-button">
-                      {story.title}
-                    </Button>
+                    <div style={{ display: 'flex' }}>
+                      <img width='60rem' height='60rem' src={story.artwork} alt={story.title} />
+                      <Button className="the-fill-app-button">
+                        {story.title}
+                      </Button>
+                    </div>
                   </ListGroupItem>
                 )
               })
               }
             </ListGroup>
-          </Container>
+          </Col>
           {/* <Col xs="12" sm="4">
               <Card>
                 <CardBody>

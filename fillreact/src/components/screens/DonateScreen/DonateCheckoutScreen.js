@@ -13,13 +13,24 @@ const promise = loadStripe(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
 function DonateCheckoutScreen(props) {
 
   // const donationAmount = props.location.state;
-  const donationAmount = props.donationAmount;
+  // const donationAmount = props.donationAmount;
+  // const donationEmail = props.donationEmail;
+
+  let donationAmount = props.location.state.donationAmount;
+  let donationEmail = props.location.state.donationEmail;
+  let donationFirstName = props.location.state.donationFirstName;
+  let donationLastName = props.location.state.donationLastName;
 
   return (
     <Container>
       <div className="App">
         <Elements stripe={promise}>
-          <StripeCheckoutForm donationAmount={donationAmount} />
+          <StripeCheckoutForm
+            donationAmount={donationAmount}
+            donationEmail={donationEmail}
+            donationFirstName={donationFirstName}
+            donationLastName={donationLastName}
+          />
         </Elements>
       </div>
     </Container>
