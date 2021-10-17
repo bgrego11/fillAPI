@@ -1,166 +1,143 @@
-import React, { useState } from 'react';
-import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
-import { Button, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
-// import PaymentMethod from './PaymentMethod';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Container, Button, Col, FormGroup, Input, Label, Row, FormFeedback } from 'reactstrap';
 import theFillTrayImage from '../../../assets/thefilltray.png';
 import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
-import DonateCheckoutScreen from './DonateCheckoutScreen';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 
 
 
 const DonateScreen = (props) => {
 
-  const [donationAmount, setDonationAmount] = useState(0);
-  const [donationFirstName, setDonationFirstName] = useState('');
-  const [donationLastName, setDonationLastName] = useState('');
-  const [donationEmail, setDonationEmail] = useState('');
-
-
-  let { path, url } = useRouteMatch();
-
-  const updateDonationAmount = event => {
-    setDonationAmount(event.target.value);
-  }
-
-  const updateDonationEmail = event => {
-    // console.log("UPDATE EMAIL: " + event.target.value);
-    setDonationEmail(event.target.value);
-  }
-
-  const updateDonationFirstName = event => {
-    setDonationFirstName(event.target.value);
-  }
-
-  const updateDonationLastName = event => {
-    setDonationLastName(event.target.value);
-  }
+  const history = useHistory();
 
   return (
-
-    <React.Fragment>
+    <Container>
       <Row>
         <Col>
+          <Formik
+            initialValues={{
+              amount: 0,
+              firstName: '',
+              lastName: '',
+              email: '',
+            }}
+            validationSchema={Yup.object().shape({
+              amount: Yup.number()
+                .min(1, 'Amount cannot be less than $1'),
+              firstName: Yup.string()
+                .required('Required'),
+              lastName: Yup.string()
+                .required('Required'),
+              email: Yup.string()
+                .email('Invalid email')
+                .required('Required'),
 
+            })}
+            onSubmit={(values) => {
+              // same shape as initial values
+              console.log("VALUES", values);
+              history.push({
+                pathname: "/donatecheckout",
+                state: {
+                  donationAmount: values.amount * 100,
+                  donationFirstName: values.firstName,
+                  donationLastName: values.lastName,
+                  donationEmail: values.email,
+                }
+              })
+            }}
+          >
+            {({ touched, errors }) => {
+              // console.log("FIELDS", errors);
+              return (
+                <Form
+                  className="the-fill-text-dark the-fill-form-heading">
 
-          <Form className="the-fill-text-dark the-fill-form-heading" row>
-            <FormGroup>
-              <legend className="the-fill-form-legend">Donation Amount</legend>
-              <Row form>
-                <Col md={6} sm={12}>
-                  <Label for="donatetype">Amount ($ USD):</Label>
-                  <Input
-                    type="number"
-                    id="donatetype"
-                    min="0.01"
-                    step="0.01"
-                    // max="2500"
-                    value={donationAmount}
-                    onChange={updateDonationAmount}
-                  />
-                </Col>
-              </Row>
-            </FormGroup>
-
-
-            <FormGroup>
-              <legend className="the-fill-form-legend">Personal Info</legend>
-              <Row form>
-                <Col md={6} sm={12}>
-                  <FormGroup>
-                    <Label for="firstName">First Name</Label>
-                    <Input
-                      type="text"
-                      name="text"
-                      id="firstName"
-                      placeholder=""
-                      value={donationFirstName}
-                      onChange={updateDonationFirstName}
-                    />
+                  <legend className="the-fill-form-legend">Donation Amount</legend>
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="amount">Amount ($ USD):</Label>
+                      <Input
+                        name="amount"
+                        id="amount"
+                        type="number"
+                        step="0.01"
+                        // placeholder=""
+                        invalid={errors.amount && touched.amount}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.amount}</FormFeedback>
+                    </Col>
                   </FormGroup>
-                </Col>
-                <Col md={6} sm={12}>
-                  <FormGroup>
-                    <Label for="lastName">Last Name</Label>
-                    <Input
-                      type="text"
-                      name="text"
-                      id="lastName"
-                      placeholder=""
-                      value={donationLastName}
-                      onChange={updateDonationLastName}
-                    />
+                  <legend className="the-fill-form-legend">Personal Info</legend>
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="firstName">First Name</Label>
+                      <Input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        // placeholder=""
+                        invalid={errors.firstName && touched.firstName}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.firstName}</FormFeedback>
+                    </Col>
                   </FormGroup>
-                </Col>
-              </Row>
-
-              <Row form>
-                <Col md={6} sm={12} xs={12}>
-                  <FormGroup>
-                    <Label for="donationEmail">Email</Label>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="donationEmail"
-                      placeholder=""
-                      value={donationEmail}
-                      onChange={updateDonationEmail}
-                    />
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="lastName">Last Name
+                      </Label>
+                      <Input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        placeholder=""
+                        invalid={errors.lastName && touched.lastName}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.lastName}</FormFeedback>
+                    </Col>
                   </FormGroup>
-                </Col>
-              </Row>
-            </FormGroup>
 
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="email">Email</Label>
+                      <Input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder=""
+                        invalid={errors.email && touched.email}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.email}</FormFeedback>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <GOTO_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />
+                      <Button
+                        className="the-fill-app-button"
+                        type="submit">
+                        Go to payment
+                      </Button>
+                    </Col>
+                  </FormGroup>
 
-
-
-
-          </Form>
-
-
-          <Row>
-
-            <Col>
-              <GOTO_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />
-              <Button
-                tag={Link} to={{
-                  pathname: `${url}/electronicpayment`,
-                  state: {
-                    donationAmount: donationAmount * 100,
-                    donationFirstName: donationFirstName,
-                    donationLastName: donationLastName,
-                    donationEmail: donationEmail,
-                  }
-                }}
-                className="the-fill-app-button"
-              >
-                Proceed to Payment
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <img src={theFillTrayImage} alt="Fill Tray" />
-            </Col>
-          </Row>
-
+                </Form>
+              )
+            }
+            }
+          </Formik>
         </Col>
-
-        <Col>
-          <Row>
-            <Col>
-              <Switch>
-                {/* <Route path={`${path}/:paymentMethod`} component={PaymentMethod}> */}
-                <Route path={`${path}/:paymentMethod`} component={DonateCheckoutScreen}>
-                </Route>
-              </Switch>
-            </Col>
-          </Row>
-
+        <Col xs={12} md={4}>
+          <img width="100%" src={theFillTrayImage} alt="Fill Tray" />
         </Col>
       </Row>
-
-
-    </React.Fragment >
+    </Container>
   )
 }
 

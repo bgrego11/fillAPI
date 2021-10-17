@@ -46,7 +46,7 @@ function App() {
                   <ProtectedRoute path="/serieslist" component={SeriesScreen} />
                   <ProtectedRoute path="/donatecheckout" component={DonateCheckoutScreen} />
                   <ProtectedRoute path="/donate" component={DonateScreen} />
-                  {/* <ProtectedRoute path="/allseriesstories" component={FillSistersScreen} /> */}
+                  <ProtectedRoute path="/donatecheckout" component={DonateCheckoutScreen} />
                   <ProtectedRoute path="/seriesstories/:seriesID" component={SeriesStoriesScreen} />
                   <ProtectedRoute path="/allstories" component={AllStoriesScreen} />
                   {/* <ProtectedRoute path="/userprofile" component={UserProfileScreen} /> */}

@@ -16,6 +16,7 @@ function DonateCheckoutScreen(props) {
   // const donationAmount = props.donationAmount;
   // const donationEmail = props.donationEmail;
 
+
   let donationAmount = props.location.state.donationAmount;
   let donationEmail = props.location.state.donationEmail;
   let donationFirstName = props.location.state.donationFirstName;
