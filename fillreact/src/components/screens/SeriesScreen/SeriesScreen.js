@@ -65,7 +65,7 @@ const SeriesScreen = ({ toggleScreen }) => {
                       display: 'inline-flex', alignItems: 'center'
                     }}
                     tag={Link} to="/"
-                    small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
+                    className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
                   </Button>
                 </div>
                 {/* <div style={{ display: 'flex' }}> */}
@@ -74,8 +74,9 @@ const SeriesScreen = ({ toggleScreen }) => {
                     style={{
                       display: 'inline-flex', alignItems: 'center'
                     }}
-                    small outline className="the-fill-app-button"
-                    modalopen={modal} onClick={toggle}
+                    className="the-fill-app-button"
+                    // modalopen={modal}
+                    onClick={toggle}
                   > <PLUS_ADD_FEATHER_SVG
                       size='20' color='rgb(250, 146, 164)' />Add New Series
                   </Button>

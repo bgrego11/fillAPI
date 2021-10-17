@@ -7,6 +7,8 @@ import { Switch, Route } from 'react-router-dom';
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 import { Container } from 'reactstrap';
 import DashBoardScreen from './components/screens/SeriesScreen/DashBoardScreen_old';
+import DashboardSeriesScreen from './components/screens/DashBoardScreen/Dashboard';
+import DonateCheckoutScreen from './components/screens/DonateScreen/DonateCheckoutScreen';
 import SeriesStoriesScreen from './components/screens/StoryScreen/SeriesStoriesScreen';
 import AllStoriesScreen from './components/screens/StoryScreen/AllStoriesScreen';
 import SeriesScreen from './components/screens/SeriesScreen/SeriesScreen';
@@ -46,14 +48,15 @@ function App() {
                 <Switch >
                   <Route exact path="/" component={Home} />
                   <ProtectedRoute path="/serieslist" component={SeriesScreen} />
+                  <ProtectedRoute path="/donatecheckout" component={DonateCheckoutScreen} />
                   <ProtectedRoute path="/donate" component={DonateScreen} />
-                  {/* <ProtectedRoute path="/allseriesstories" component={FillSistersScreen} /> */}
+                  <ProtectedRoute path="/donatecheckout" component={DonateCheckoutScreen} />
                   <ProtectedRoute path="/seriesstories/:seriesID" component={SeriesStoriesScreen} />
                   <ProtectedRoute path="/allstories" component={AllStoriesScreen} />
                   {/* <ProtectedRoute path="/userprofile" component={UserProfileScreen} /> */}
                   <ProtectedRoute path="/singlestory" component={StoryScreen} />
                   <ProtectedRoute path="/userprofile" component={Profile} />
-                  <ProtectedRoute path="/editdashboard" component={DashBoardScreen} />
+                  <ProtectedRoute path="/editdashboard" component={DashboardSeriesScreen} />
                   <ProtectedRoute path="/editstories/:seriesID" component={EditStoryscreen} />
                   <ProtectedRoute path="/editcarousel" component={EditCarouselImages} />
                   <Route path="/error" component={ErrorScreen} />
