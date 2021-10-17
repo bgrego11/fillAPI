@@ -12,29 +12,26 @@ import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import ErrorScreen from '../../error/ErrorScreen';
 
 
-const DashboardSeriesScreen = ({ toggleScreen }) => {
-  const [seriesData, setSeriesData] = useState([]);
+const EditCarouselImages = (props) => {
+  const [carouselData, setCarouselData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [err, setErr] = useState(null);
   const [modal, setModal] = useState(false);
-  const toggle = () => {
-    setModal(!modal);
-  }
 
   useEffect(() => {
-    fetchSeriesData();
+    fetchCarouselData();
   }, []);
 
-  const fetchSeriesData = async () => {
+  const fetchCarouselData = async () => {
     try {
-      let res = await fetch('https://thefill.herokuapp.com/api/series', {
+      let res = await fetch('https://thefill.herokuapp.com/api/carousel', {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:3000',
       }
       );
       let newData = await res.json();
-      setSeriesData(newData);
+      setCarouselData(newData);
       setIsLoaded(true)
     } catch (err) {
       setErr(err);
@@ -64,37 +61,17 @@ const DashboardSeriesScreen = ({ toggleScreen }) => {
                     style={{
                       display: 'inline-flex', alignItems: 'center'
                     }}
-                    tag={Link} to="/"
-                    small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
+                    tag={Link} to="/editdashboard"
+                    small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Dashboard
                   </Button>
                 </div>
                 {/* <div style={{ display: 'flex' }}> */}
-                <div>
-                <Button
-                    style={{
-                      display: 'inline-flex', alignItems: 'center'
-                    }}
-                    small outline className="the-fill-app-button"
-                    tag={Link} to="/editcarousel"
-                  > <PLUS_ADD_FEATHER_SVG
-                      size='20' color='rgb(250, 146, 164)' />Edit Carousel
-                  </Button>
-                  <Button
-                    style={{
-                      display: 'inline-flex', alignItems: 'center'
-                    }}
-                    small outline className="the-fill-app-button"
-                    modalopen={modal} onClick={toggle}
-                  > <PLUS_ADD_FEATHER_SVG
-                      size='20' color='rgb(250, 146, 164)' />Add New Series
-                  </Button>
-                </div>
               </div>
             </Col>
           </Row>
           <Row>
-            {seriesData.map((series, index) => {
-              return <Col key={index} xs="12" sm="6"><DashBoardSeriesCard toggleScreen={toggleScreen} seriesData={series} /></Col>
+            {carouselData.map((carousel, index) => {
+              return <Col key={index} xs="12" sm="6">{carousel.dt_url}</Col>
             })
             }
             {/* <Col xs="12" sm="6">
@@ -106,7 +83,6 @@ const DashboardSeriesScreen = ({ toggleScreen }) => {
               </Card>
             </Col> */}
           </Row>
-          <NewSeriesModal isOpen={modal} toggle={toggle} />
         </div>
 
       </Fragment>
@@ -114,4 +90,4 @@ const DashboardSeriesScreen = ({ toggleScreen }) => {
   }
 }
 
-export default DashboardSeriesScreen;
+export default EditCarouselImages;

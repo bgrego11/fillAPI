@@ -12,6 +12,7 @@ import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import ErrorScreen from '../../error/ErrorScreen';
+import { filter } from 'lodash';
 
 
 
@@ -26,6 +27,38 @@ const SeriesStoriesScreen = (props) => {
     setNewModal(!newModal);
   }
 
+  // We need to filter sotries by their respective paramter 
+  // In order to do this we will take a key from the tag and update our array
+  const filterStories = (sortParams) => {
+    const matchingStoryTags = []
+    const sortFake = ['love', "inspirational", "monotheism"]
+    const newStoryArray = []
+
+    storiesData.map((story) => {
+      story.st_tags.map((filterTag) => {
+        sortFake.map((filterName) => {
+          if (filterTag.tag === filterName) {
+            if (matchingStoryTags.indexOf(filterTag.story_id)) {
+              matchingStoryTags.push(filterTag.story_id)
+            }
+          }
+        })
+      })
+    })
+    console.log(matchingStoryTags)
+    storiesData.map((getIT) => {
+      matchingStoryTags.map((story) => {
+        if (story === getIT.id) {
+          newStoryArray.push(getIT)
+        }
+      })
+    })
+
+    console.log(newStoryArray)
+    setStoriesData(newStoryArray)
+
+  }
+
   const fetchStoryData = async () => {
     try {
       let res = await fetch(`https://thefill.herokuapp.com/api/story/`, {
@@ -34,6 +67,7 @@ const SeriesStoriesScreen = (props) => {
       }
       );
       let rawStoriesData = await res.json();
+      console.log(rawStoriesData)
       setStoriesData(rawStoriesData);
       setIsLoaded(true);
     }
@@ -68,6 +102,7 @@ const SeriesStoriesScreen = (props) => {
                   tag={Link} to="/"
                   small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
                 </Button>
+                <Button onClick={filterStories}>Filter</Button>
               </div>
               {/* <div style={{ display: 'flex' }}> */}
               {/* <div> */}

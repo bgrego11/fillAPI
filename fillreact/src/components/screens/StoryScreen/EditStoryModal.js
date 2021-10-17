@@ -12,6 +12,7 @@ const EditStoryModal = (props) => {
   const [coverImage, setCoverImage ] = useState('');
   const [audioURL, setAudioURL] = useState('');
   const [storyDuration, setStoryDuration] = useState('');
+  const [storiesTags, setStoriestags] = useState([])
   const [addSectionTitle, setAddSectionTitle] = useState('');
   const [addSectionSubTitle, setAddSectionSubTitle] = useState('');
   const [addSectionText, setAddSectionText] = useState('');
@@ -19,6 +20,7 @@ const EditStoryModal = (props) => {
   const [editSectionSubTitle, setEditSectionSubTitle] = useState('');
   const [editSectionText, setEditSectionText] = useState('');
   const [sectionData, setSectionData] = useState([])
+  const [addStoryTag, setAddStoryTag] = useState("")
 
   const handleTitleChange = event => {
     setTitle(event.target.value);
@@ -64,7 +66,68 @@ const EditStoryModal = (props) => {
     setAddSectionText(event.target.value)
   }
 
-  const handleAddSection = (event) => {
+  const handleAddStoryTagText = event => {
+    setAddStoryTag(event.target.value)
+  }
+
+  const handleAddStoryTag = async (event) => {
+    event.preventDefault();
+    console.log("add story tag")
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "story_id": `${props.id}`,
+        "tag": `${addStoryTag}`,
+       })
+  };
+  try {
+  const response = await fetch('https://thefill.herokuapp.com/api/storytag', requestOptions)
+
+      const data = await response.json();
+      console.log(data);
+    setAddStoryTag("")
+      setStoriestags([...storiesTags, { id: data.id, "story_id": `${props.id}`, "tag": `${addStoryTag}`}])
+      // check for error response
+      if (!response.ok) {
+          // get error message from body or default to response status
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);    
+      }
+    } catch(error) {
+      console.error('There was an error!', error);
+  };
+  }
+
+  const handleDeleteStoryTag = (tagId) => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+  };
+  fetch(`https://thefill.herokuapp.com/api/storytag/${tagId}`, requestOptions)
+  .then(async response => {
+      const data = await response.json();
+      console.log(data);
+      const newStoryTagArr = storiesTags.filter(tags => tags.id !== tagId)
+      console.log(newStoryTagArr)
+      setStoriestags(newStoryTagArr)
+      setAddStoryTag('')
+
+      // check for error response
+      if (!response.ok) {
+          // get error message from body or default to response status
+          const error = (data && data.message) || response.status;
+          return Promise.reject(error);    
+      }
+  })
+  .catch(error => {
+    
+      console.error('There was an error!', error);
+  
+  });
+  }
+
+  const handleAddSection = async (event) => {
     event.preventDefault();
     const requestOptions = {
       method: 'POST',
@@ -76,10 +139,15 @@ const EditStoryModal = (props) => {
         "story_id": `${props.id}`
        })
   };
-  fetch('https://thefill.herokuapp.com/api/section', requestOptions)
-  .then(async response => {
+  try {
+  const response = await fetch('https://thefill.herokuapp.com/api/section', requestOptions)
+
       const data = await response.json();
       console.log(data);
+      setAddSectionTitle('')
+      setAddSectionSubTitle('')
+      setAddSectionText('')
+
       props.toggle();
       // check for error response
       if (!response.ok) {
@@ -87,14 +155,10 @@ const EditStoryModal = (props) => {
           const error = (data && data.message) || response.status;
           return Promise.reject(error);    
       }
-      
-  })
-  .catch(error => {
-    
+    } catch(error) {
       console.error('There was an error!', error);
-
-  });
-  }
+  };
+}
 
   const handleSubmit = (event) => { 
 
@@ -192,8 +256,16 @@ fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
         setAudioURL(props.audioURL)
         setStoryDuration(props.duration)
         fetchSectionData()
+        console.log("this is edit storytag", props)
 
       }, [ props.isOpen, props.title, props.description, props.img, props.storyDuration ]);
+
+      useEffect(() => {
+        // Filter our story tags that match the story id
+        const storyTags = props.storyTagData.filter(storyTags => storyTags.story_id === props.id)
+        console.log("storyTags", storyTags)
+        setStoriestags(storyTags)
+      }, [props.id, props.storyTagData])
 
     const fetchSectionData = async () => {
       let res = await fetch(`https://thefill.herokuapp.com/api/story/${props.id}`, {
@@ -233,19 +305,30 @@ fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
                         <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title" onChange={handleEditSectionTitle}  defaultValue={section.title} />
                         <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" onChange={handleEditSectionSubTitle}  defaultValue={section.sub_title} />
                         <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" onChange={handleEditSectionText} defaultValue={section.text} />
-                        <Button onClick={() => handleEditSection(section.id)} >Save Edited Section</Button>
-                        <Button onClick={() => handleDeleteSection(section.id)}>Delete Section</Button>
+                        <Button color="primary" onClick={() => handleEditSection(section.id)} >Save Edited Section</Button>
+                        <Button color="danger" onClick={() => handleDeleteSection(section.id)}>Delete Section</Button>
                       </div>
                     )
                   })
                 }
                 <div className="addSection">
                 <Label className="addSection cardModalTitle" for="imageUrl">Add New Section</Label>
-                    <Input type="text" name="title" id="storyDuration" placeholder="Add Section Title" onChange={handleAddSectionTitle}  defaultValue={addSectionTitle} />
-                    <Input type="text" name="title" id="storyDuration" placeholder="Add Sub Title" onChange={handleAddSectionSubTitle} defaultValue={addSectionSubTitle} />
-                    <Input type="textarea" name="title" id="storyDuration" placeholder="Add Section Text" onChange={handleAddSectionText} defaultValue={addSectionText} />
+                    <Input type="text" name="title" placeholder="Add Section Title" onChange={handleAddSectionTitle}  defaultValue={addSectionTitle} />
+                    <Input type="text" name="title" placeholder="Add Sub Title" onChange={handleAddSectionSubTitle} defaultValue={addSectionSubTitle} />
+                    <Input type="textarea" name="title" placeholder="Add Section Text" onChange={handleAddSectionText} defaultValue={addSectionText} />
                 <Button onClick={handleAddSection}>Add Section</Button>
 
+                </div>
+                <div className="addStoryTags">
+                  <Label className="addSection cardModalTitle">Story Tags </Label>
+                  {storiesTags && storiesTags.map((tag) => {
+                    return (
+                      <div>Tag: {tag.tag} <Button color="danger" onClick={() => handleDeleteStoryTag(tag.id)}>Delete Tag</Button></div>
+                    )
+                  })}
+                  <Label className="addSection cardModalTitle" for="imageUrl">Add New Story Tag</Label>
+                    <Input type="text" name="title" placeholder="Add Story Tag" onChange={handleAddStoryTagText}  defaultValue={addStoryTag} />
+                    <Button color="primary" onClick={handleAddStoryTag}>Add Story Tag</Button>
                 </div>
             </FormGroup>
         </Form>

@@ -83,7 +83,7 @@ const StoryScreen = (props) => {
                 style={{ color: 'rgb(162,81,87)' }}>
                 {cardData && cardData.title}
               </div>
-              <div style={{ display: 'flex', verticalAlign: 'top' }}>
+              {/* <div style={{ display: 'flex', verticalAlign: 'top' }}>
                 <div isOpen={modal} onClick={toggle}>
                   <EDIT_FEATHER_SVG
                     size='20' color='rgb(250, 146, 164)' />
@@ -92,7 +92,7 @@ const StoryScreen = (props) => {
                   <DELETE_TRASH_FEATHER_SVG
                     size='20' color='rgb(250, 146, 164)' />
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div><p>{cardData.description}</p></div>

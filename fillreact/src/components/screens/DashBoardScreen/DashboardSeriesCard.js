@@ -78,10 +78,10 @@ const DashboardSeriesCard = (props) => {
           <GOTO_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />
           <Button
             tag={Link} to={{
-              pathname: `/seriesstories/${props.seriesData.id}`,
+              pathname: `/editstories/${props.seriesData.id}`,
               state: props.seriesData,
             }}
-            small outline className="the-fill-app-button">Go to series
+            small outline className="the-fill-app-button">Edit Stories in Series
           </Button>
         </CardBody>
       </Card>

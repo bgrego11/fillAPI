@@ -14,7 +14,9 @@ import StoryScreen from './components/screens/StoryScreen/StoryScreen';
 import LoadingScreen from './components/screens/LoadingScreen/LoadingScreen';
 import Profile from './components/profile/Profile';
 import TheFillFooter from './components/footer/TheFillFooter';
+import EditStoryscreen from './components/screens/DashBoardScreen/EditStoryscreen'
 import ErrorScreen from './components/error/ErrorScreen';
+import EditCarouselImages from './components/screens/DashBoardScreen/EditCarouselImages';
 
 const ProtectedRoute = ({ component, ...args }) => (
   <Route component={withAuthenticationRequired(component, {
@@ -52,6 +54,8 @@ function App() {
                   <ProtectedRoute path="/singlestory" component={StoryScreen} />
                   <ProtectedRoute path="/userprofile" component={Profile} />
                   <ProtectedRoute path="/editdashboard" component={DashBoardScreen} />
+                  <ProtectedRoute path="/editstories/:seriesID" component={EditStoryscreen} />
+                  <ProtectedRoute path="/editcarousel" component={EditCarouselImages} />
                   <Route path="/error" component={ErrorScreen} />
                 </Switch>
               </main>

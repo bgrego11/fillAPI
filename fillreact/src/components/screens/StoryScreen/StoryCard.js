@@ -6,7 +6,7 @@ import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_S
 import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
 import EditStoryModal from './EditStoryModal'
 
-const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
+const StoryCard = ({ cardData, storyTagData }) => {
 
   const [modal, setModal] = useState(false);
   const toggle = () => {
@@ -74,7 +74,16 @@ const StoryCard = ({ cardData, toggleScreen, sectionData }) => {
           <Button onClick={handleDelete}>Delete</Button> */}
         </CardBody>
       </Card>
-      <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} audioURL={cardData.url} toggle={toggle} />
+      <EditStoryModal 
+        id={cardData.id} 
+        title={cardData.title} 
+        img={cardData.artwork} 
+        description={cardData.description} 
+        duration={cardData.duration} 
+        isOpen={modal} 
+        audioURL={cardData.url} 
+        storyTagData={storyTagData}
+        toggle={toggle} />
     </div>
   );
 };
