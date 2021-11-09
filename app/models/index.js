@@ -4,6 +4,8 @@ const sequelize = new Sequelize('mysql://ben:hotdogboy79@thefill.c4dakz7il1rp.us
 
 // const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
 
+// const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
+
 
 const db = {};
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import '../../../App.scss';
 
-import { Row, Col } from 'reactstrap';
-import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_SVG';
-import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
+import { Row, Col, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import ErrorScreen from '../../error/ErrorScreen';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
-import EditStoryModal from './EditStoryModal'
+import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
 
 // const StoryScreen = ({ cardData, toggleScreen, sectionData }) => {
 const StoryScreen = (props) => {
@@ -16,34 +16,13 @@ const StoryScreen = (props) => {
   const [sectionData, setSectionData] = useState();
 
   const cardData = props.location.state;
+  console.log(cardData)
 
   const [modal, setModal] = useState(false);
   const toggle = () => {
     setModal(!modal);
   }
 
-  const handleDelete = (event) => {
-
-    event.preventDefault();
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    fetch(`https://thefill.herokuapp.com/api/story/${cardData.id}`, requestOptions)
-      .then(async response => {
-        const data = await response.json();
-        // check for error response
-        if (!response.ok) {
-          // get error message from body or default to response status
-          const error = (data && data.message) || response.status;
-          return Promise.reject(error);
-        }
-
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      });
-  };
 
   const fetchSectionData = async () => {
     try {
@@ -75,6 +54,16 @@ const StoryScreen = (props) => {
   else {
     return (
       <div style={{ justifyContent: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Button
+          style={{
+            display: 'inline-flex', alignItems: 'center'
+          }}
+          tag={Link} to={cardData && `seriesstories/${cardData.series_id}`}
+          small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Back to Series List
+        </Button>
+        <div></div>
+        </div>
         <Row >
           <Col xs='12' sm='6'>
             <img width="100%" src={cardData.artwork} alt="Card cap" />
@@ -83,40 +72,30 @@ const StoryScreen = (props) => {
                 style={{ color: 'rgb(162,81,87)' }}>
                 {cardData && cardData.title}
               </div>
-              {/* <div style={{ display: 'flex', verticalAlign: 'top' }}>
-                <div isOpen={modal} onClick={toggle}>
-                  <EDIT_FEATHER_SVG
-                    size='20' color='rgb(250, 146, 164)' />
-                </div>
-                <div>
-                  <DELETE_TRASH_FEATHER_SVG
-                    size='20' color='rgb(250, 146, 164)' />
-                </div>
-              </div> */}
             </div>
 
             <div><p>{cardData.description}</p></div>
           </Col>
           <Col xs='12' sm='6'>
-          {
-          sectionData && sectionData.map((section, index) => {
-            console.log(section)
-            if (section.story_id === cardData.id) {
-              return (
-                <div key={index}>
-                  <h3>{section.title}</h3>
-                  <h4>{section.sub_title}</h4>
-                  <p>{section.text}</p>
-                </div>
-              )
-            }
-          })
-        }
-            <ReactPlayer width='100%' controls='true' url={cardData.url} />
+            <div className="story-screen-right-container">
+                {
+                sectionData && sectionData.map((section, index) => {
+                  console.log(section)
+                  if (section.story_id === cardData.id) {
+                    return (
+                      <div key={index}>
+                        <h3>{section.title}</h3>
+                        <h4>{section.sub_title}</h4>
+                        <p>{section.text}</p>
+                      </div>
+                    )
+                  }
+                })
+              }
+        </div>
+        <ReactPlayer width='100%' height="60px" controls='true' url={cardData.url} />
           </Col>
         </Row>
-
-        <EditStoryModal id={cardData.id} title={cardData.title} img={cardData.artwork} description={cardData.description} duration={cardData.duration} isOpen={modal} audioURL={cardData.url} toggle={toggle} />
       </div >
     );
   }

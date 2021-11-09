@@ -7,7 +7,6 @@ import NewSeriesModal from '../DashBoardScreen/NewSeriesModal'
 import { Link } from 'react-router-dom';
 // import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
 import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
-import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import ErrorScreen from '../../error/ErrorScreen';
 
@@ -65,21 +64,10 @@ const SeriesScreen = ({ toggleScreen }) => {
                       display: 'inline-flex', alignItems: 'center'
                     }}
                     tag={Link} to="/"
-                    small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
+                    className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
                   </Button>
                 </div>
                 {/* <div style={{ display: 'flex' }}> */}
-                <div>
-                  <Button
-                    style={{
-                      display: 'inline-flex', alignItems: 'center'
-                    }}
-                    small outline className="the-fill-app-button"
-                    modalopen={modal} onClick={toggle}
-                  > <PLUS_ADD_FEATHER_SVG
-                      size='20' color='rgb(250, 146, 164)' />Add New Series
-                  </Button>
-                </div>
               </div>
             </Col>
           </Row>

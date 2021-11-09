@@ -9,7 +9,6 @@ import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
 import EditSeriesModal from '../DashBoardScreen/EditSeriesModal';
 import DELETE_TRASH_FEATHER_SVG from '../../../assets/svg/DELETE_TRASH_FEATHER_SVG';
 import EDIT_FEATHER_SVG from '../../../assets/svg/EDIT_FEATHER_SVG';
-import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
 
 
 
@@ -36,7 +35,7 @@ const DashboardSeriesCard = (props) => {
           const error = (data && data.message) || response.status;
           return Promise.reject(error);
         }
-
+        window.location.reload()
       })
       .catch(error => {
         console.error('There was an error!', error);
@@ -59,10 +58,6 @@ const DashboardSeriesCard = (props) => {
             </div>
             {/* Admin Section begin */}
             <div style={{ display: 'flex', verticalAlign: 'top' }}>
-              <div onClick={() => props.toggleScreen('story', props.seriesData.id)}>
-                <PLUS_ADD_FEATHER_SVG
-                  size='20' color='rgb(250, 146, 164)' />
-              </div>
               <div isOpen={modal} onClick={toggle}>
                 <EDIT_FEATHER_SVG
                   size='20' color='rgb(250, 146, 164)' />

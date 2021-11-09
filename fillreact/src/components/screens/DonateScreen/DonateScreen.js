@@ -1,109 +1,144 @@
-
 import React from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import {
-  Elements,
-  useStripe,
-  useElements,
-  CardNumberElement,
-} from '@stripe/react-stripe-js';
-import { Col, FormGroup, Label, Row } from 'reactstrap';
-import { Button } from 'reactstrap';
-import CustomCardNumberElement from './CustomCardNumberElement';
-import CustomCardExpiryElement from './CustomCardExpiryElement';
-import CustomCardCvcElement from './CustomCardCvcElement';
-
-// import './styles.css';
-
-const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (elements == null) {
-      console.log("ELEMENTS IS NULL");
-      return;
-    }
-
-    // const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //   type: 'card',
-    //   card: elements.getElement(CardNumberElement),
-    // });
+import { useHistory } from 'react-router-dom';
+import { Container, Button, Col, FormGroup, Input, Label, Row, FormFeedback } from 'reactstrap';
+import theFillTrayImage from '../../../assets/thefilltray.png';
+import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
 
 
-    const card = elements.getElement(CardNumberElement);
-    console.log("CARD: ");
-    console.log(card);
-    console.log("CARD DONE");
-    const result = await stripe.createToken(card);
-    if (result.error) {
-      console.log(result.error.message);
-    } else {
-      console.log("THE TOKEN");
-      console.log(result.token);
-    }
 
+const DonateScreen = (props) => {
 
-  };
+  const history = useHistory();
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Row>
-        <Col xs='12' sm='8' md='4' lg='3'>
-          <FormGroup>
-            <Label className='stripe-form-label'>
-              Card Number
-            </Label>
-            <CustomCardNumberElement />
-          </FormGroup>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs='10' sm='8' md='5' lg='3'>
-          <FormGroup>
-            <Label className='stripe-form-label'>
-              Card Expiry
-            </Label>
-            <CustomCardExpiryElement />
-          </FormGroup>
-        </Col>
-        <Col xs='10' sm='8' md='5' lg='3'>
-          <FormGroup>
-            <Label className='stripe-form-label'>
-              Card CVC
-            </Label>
-            <CustomCardCvcElement />
-          </FormGroup>
-        </Col>
-      </Row>
-
+    <Container>
       <Row>
         <Col>
-          <Button disable={!stripe || !elements}
-            small outline className="the-fill-app-button">
-            Pay
-          </Button>
+          <Formik
+            initialValues={{
+              amount: 0,
+              firstName: '',
+              lastName: '',
+              email: '',
+            }}
+            validationSchema={Yup.object().shape({
+              amount: Yup.number()
+                .min(1, 'Amount cannot be less than $1'),
+              firstName: Yup.string()
+                .required('Required'),
+              lastName: Yup.string()
+                .required('Required'),
+              email: Yup.string()
+                .email('Invalid email')
+                .required('Required'),
+
+            })}
+            onSubmit={(values) => {
+              // same shape as initial values
+              console.log("VALUES", values);
+              history.push({
+                pathname: "/donatecheckout",
+                state: {
+                  donationAmount: values.amount * 100,
+                  donationFirstName: values.firstName,
+                  donationLastName: values.lastName,
+                  donationEmail: values.email,
+                }
+              })
+            }}
+          >
+            {({ touched, errors }) => {
+              // console.log("FIELDS", errors);
+              return (
+                <Form
+                  className="the-fill-text-dark the-fill-form-heading">
+
+                  <legend className="the-fill-form-legend">Donation Amount</legend>
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="amount">Amount ($ USD):</Label>
+                      <Input
+                        name="amount"
+                        id="amount"
+                        type="number"
+                        step="0.01"
+                        // placeholder=""
+                        invalid={errors.amount && touched.amount}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.amount}</FormFeedback>
+                    </Col>
+                  </FormGroup>
+                  <legend className="the-fill-form-legend">Personal Info</legend>
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="firstName">First Name</Label>
+                      <Input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        // placeholder=""
+                        invalid={errors.firstName && touched.firstName}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.firstName}</FormFeedback>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="lastName">Last Name
+                      </Label>
+                      <Input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        placeholder=""
+                        invalid={errors.lastName && touched.lastName}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.lastName}</FormFeedback>
+                    </Col>
+                  </FormGroup>
+
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <Label for="email">Email</Label>
+                      <Input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder=""
+                        invalid={errors.email && touched.email}
+                        tag={Field}
+                      />
+                      <FormFeedback>{errors.email}</FormFeedback>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Col xs={12} md={6}>
+                      <GOTO_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />
+                      <Button
+                        className="the-fill-app-button"
+                        type="submit">
+                        Go to payment
+                      </Button>
+                    </Col>
+                  </FormGroup>
+
+                </Form>
+              )
+            }
+            }
+          </Formik>
+        </Col>
+        <Col xs={12} md={4}>
+          <img width="100%" src={theFillTrayImage} alt="Fill Tray" />
         </Col>
       </Row>
-    </form>
-  );
-};
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-console.log("STRIPE KEY: " + process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
-
-const DonateScreen = () => (
-  // <div style={{ paddingTop: '100px' }}>
-  <Row>
-    {/* <Col xs='12' style={{ paddingTop: '100px' }}> */}
-    <Col xs='12'>
-      <Elements stripe={stripePromise}>
-        <CheckoutForm />
-      </Elements>
-    </Col>
-  </Row>
-);
+    </Container>
+  )
+}
 
 export default DonateScreen;
