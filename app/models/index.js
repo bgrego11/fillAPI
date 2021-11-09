@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
-// const sequelize = new Sequelize('mysql://ben:hotdogboy79@thefill.c4dakz7il1rp.us-east-2.rds.amazonaws.com:3306/thefilldb');
+const sequelize = new Sequelize('mysql://ben:hotdogboy79@thefill.c4dakz7il1rp.us-east-2.rds.amazonaws.com:3306/thefilldb');
 
-const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
+// const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
 
 // const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
 
