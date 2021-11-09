@@ -1,4 +1,5 @@
 import './App.scss';
+import './index.css'
 
 import TheFillNavBar from './components/navigation/TheFillNavBar';
 import Home from './components/screens/HomeScreen/HomeScreen';
@@ -6,7 +7,6 @@ import DonateScreen from './components/screens/DonateScreen/DonateScreen';
 import { Switch, Route } from 'react-router-dom';
 import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 import { Container } from 'reactstrap';
-import DashBoardScreen from './components/screens/SeriesScreen/DashBoardScreen_old';
 import DashboardSeriesScreen from './components/screens/DashBoardScreen/Dashboard';
 import DonateCheckoutScreen from './components/screens/DonateScreen/DonateCheckoutScreen';
 import SeriesStoriesScreen from './components/screens/StoryScreen/SeriesStoriesScreen';

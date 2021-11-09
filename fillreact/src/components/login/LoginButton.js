@@ -7,7 +7,7 @@ import LoadingScreen from '../screens/LoadingScreen/LoadingScreen';
 
 const LoginButton = () => {
 
-  const { loginWithRedirect, isLoading, error } = useAuth0();
+  const { loginWithRedirect, isLoading } = useAuth0();
 
   if (isLoading) {
     <LoadingScreen />

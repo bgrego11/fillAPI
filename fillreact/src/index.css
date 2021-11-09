@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* story screen */
+.story-screen-right-container {
+  max-height: 70vh;
+  overflow: scroll;
+}
+
+.feather {
+  cursor: pointer;
+}

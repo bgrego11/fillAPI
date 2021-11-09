@@ -10,8 +10,6 @@ import {
   NavItem,
   NavLink,
   Container,
-  DropdownMenu,
-  DropdownItem,
   DropdownToggle,
   UncontrolledDropdown,
 } from 'reactstrap';
@@ -29,7 +27,6 @@ const TheFillNavBar = (props) => {
 
   const { user, isAuthenticated } = useAuth0();
   const userFallback = get(user, 'email', '');
-  console.log(userFallback)
 
   return (
     // <Navbar color="#fff" light expand="md">

@@ -148,3 +148,9 @@ button:hover {
   /* background-color: paleturquoise !important; */
   /* width: 150px; */
 }
+
+// Story Screen
+.story-screen-right-container {
+  max-height: 90vh;
+  overflow: scroll;
+}

@@ -1,18 +1,14 @@
-
-
-
-import React, { useEffect, useState, useParams } from 'react';
+/* eslint-disable array-callback-return */
+import React, { useEffect, useState } from 'react';
 import {
   Row, Col, Button, ListGroup, ListGroupItem, Container
 } from 'reactstrap';
 
 // Components
-import NewStoryModal from './NewStoryModal'
 import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import ErrorScreen from '../../error/ErrorScreen';
-import { filter } from 'lodash';
 
 
 
@@ -21,11 +17,6 @@ const SeriesStoriesScreen = (props) => {
   const [storiesData, setStoriesData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [err, setErr] = useState(null);
-  const [newModal, setNewModal] = useState(false);
-
-  const newModaltoggle = () => {
-    setNewModal(!newModal);
-  }
 
   // We need to filter sotries by their respective paramter 
   // In order to do this we will take a key from the tag and update our array

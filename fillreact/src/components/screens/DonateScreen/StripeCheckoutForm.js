@@ -15,8 +15,8 @@ import SelectField from "./SelectField";
 function StripeCheckoutForm(props) {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
-  const [processing, setProcessing] = useState('');
-  const [disabled, setDisabled] = useState(true);
+  // const [processing, setProcessing] = useState('');
+  // const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState('');
 
   const stripe = useStripe();
@@ -40,7 +40,7 @@ function StripeCheckoutForm(props) {
         // console.log(data.clientSecret);
         setClientSecret(data.clientSecret);
       });
-  }, []);
+  }, [props.donationAmount]);
 
   const handleCardElementsChange = (event) => {
     // Set error message to be shown when the user inputs incorrect payment data

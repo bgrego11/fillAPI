@@ -17,9 +17,10 @@ const SeriesStoriesScreen = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [err, setErr] = useState(null);
   const [newModal, setNewModal] = useState(false);
+  const [seriesData, setSeriesData] = useState({})
 
   const seriesID = props.match.params.seriesID;
-  const seriesData = props.location.state;
+  // const seriesData = props.location.state;
   // const { seriesID } = useParams();
 
   const newModaltoggle = () => {
@@ -36,6 +37,8 @@ const SeriesStoriesScreen = (props) => {
         }
         );
         let seriesData = await res.json();
+        setSeriesData(seriesData)
+        console.log(seriesData)
         setSeriesStories(seriesData.stories);
         setIsLoaded(true);
       }
@@ -77,13 +80,16 @@ const SeriesStoriesScreen = (props) => {
         </Row>
         <Row>
           <Col xs="12">
+            {seriesData &&
             <img width="100%" src={seriesData.img} alt={seriesData.title} />
+  }
           </Col>
         </Row>
         <Row>
           <Col>
             <div style={{ paddingTop: '2rem' }}>
-              <p>{seriesData.description}</p>
+              {seriesData &&
+              <p>{seriesData.description}</p> }
             </div>
           </Col>
         </Row>
