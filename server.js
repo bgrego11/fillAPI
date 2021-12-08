@@ -30,9 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/fillreact", "build")));
 app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/fillreact/build', 'index.html'))
-})
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/fillreact/build', 'index.html'))
+// })
 
 require("./app/routes/carousel.routes")(app);
 require("./app/routes/st_tag.routes")(app);
@@ -41,6 +41,11 @@ require("./app/routes/story.routes")(app);
 require("./app/routes/section.routes")(app);
 require("./app/routes/userprogress.routes")(app);
 require("./app/routes/stripe.routes")(app);
+
+app.get('*', (req, res) => {                       
+  res.sendFile(path.join(__dirname, '/fillreact/build', 'index.html'));                               
+});
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
