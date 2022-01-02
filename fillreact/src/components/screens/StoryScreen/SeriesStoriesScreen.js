@@ -119,14 +119,6 @@ const SeriesStoriesScreen = (props) => {
               }
             </ListGroup>
           </Container>
-          {/* <Col xs="12" sm="4">
-              <Card>
-                <CardBody>
-                  <CardTitle tag="h3">Add New Story</CardTitle>
-                  <Button onClick={newModaltoggle}>Click to Add</Button>
-                </CardBody>
-              </Card>
-            </Col> */}
         </Row>
         <NewStoryModal isOpen={newModal} seriesID={seriesID} toggle={newModaltoggle} />
       </div>
