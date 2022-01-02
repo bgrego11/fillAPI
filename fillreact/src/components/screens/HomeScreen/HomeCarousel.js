@@ -6,6 +6,7 @@ import {
   CarouselControl,
   // CarouselCaption
 } from 'reactstrap';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 // import carouselImage1 from '../../../assets/homeCarousel1.png';
 // import carouselImage2 from '../../../assets/homeCarousel2.png';
@@ -111,6 +112,9 @@ const HomeCarousel = (props) => {
     );
   });
 
+  if (!isLoaded) {
+    return <LoadingScreen />
+  } else {
   return (
     <Carousel
       activeIndex={activeIndex}
@@ -124,6 +128,7 @@ const HomeCarousel = (props) => {
       <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
     </Carousel>
   );
+  }
 }
 
 export default HomeCarousel
