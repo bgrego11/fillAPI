@@ -87,6 +87,7 @@ const SeriesStoriesScreen = (props) => {
       let rawStoriesData = await res.json();
       let storyTagArray = []
 
+      console.log(rawStoriesData)
       setAllStoryData(rawStoriesData);
       setStoriesData(rawStoriesData);
 
