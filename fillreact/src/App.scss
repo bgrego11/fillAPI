@@ -41,7 +41,7 @@ $navbar-height: 120px;
 }
 
 footer {
-  height: $footer-copyright-height;
+  height: auto;
   background:rgb(162, 81, 87);
   text-align: center;
 }
@@ -136,4 +136,21 @@ button:hover {
   background-color: #7795f8;
   transform: translateY(-1px);
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.the-fill-stripe-button {
+  border: 1 !important;
+  border-color: rgb(240, 146, 164) !important;
+  color: rgb(240, 146, 164) !important;
+  background-color: white !important;
+  margin: 2px;
+  width: 100%;
+  /* background-color: paleturquoise !important; */
+  /* width: 150px; */
+}
+
+// Story Screen
+.story-screen-right-container {
+  max-height: 90vh;
+  overflow: scroll;
 }

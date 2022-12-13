@@ -119,6 +119,7 @@ const EditStoryModal = (props) => {
           const error = (data && data.message) || response.status;
           return Promise.reject(error);    
       }
+      window.location.reload()
   })
   .catch(error => {
     
@@ -143,12 +144,12 @@ const EditStoryModal = (props) => {
   const response = await fetch('https://thefill.herokuapp.com/api/section', requestOptions)
 
       const data = await response.json();
-      console.log(data);
+      setSectionData([...sectionData, data])
       setAddSectionTitle('')
       setAddSectionSubTitle('')
       setAddSectionText('')
 
-      props.toggle();
+      // props.toggle();
       // check for error response
       if (!response.ok) {
           // get error message from body or default to response status
@@ -157,6 +158,7 @@ const EditStoryModal = (props) => {
       }
     } catch(error) {
       console.error('There was an error!', error);
+      alert("there was a problem with your request pleasw try again")
   };
 }
 
@@ -185,6 +187,7 @@ const EditStoryModal = (props) => {
           const error = (data && data.message) || response.status;
           return Promise.reject(error);    
       }
+      window.location.reload()
   })
   .catch(error => {
     

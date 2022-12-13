@@ -1,9 +1,9 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { Row, Col, Button } from 'reactstrap';
+import { Row, Col, Button, Card, CardImg, CardBody, CardTitle  } from 'reactstrap';
 
 // Components
-import DashBoardSeriesCard from './DashboardSeriesCard'
-import NewSeriesModal from './NewSeriesModal'
+import EditCarouselsModal from './EditCarouselModal';
+
 import { Link } from 'react-router-dom';
 // import GOTO_FEATHER_SVG from '../../../assets/svg/GOTO_FEATHER_SVG';
 import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
@@ -16,7 +16,6 @@ const EditCarouselImages = (props) => {
   const [carouselData, setCarouselData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [err, setErr] = useState(null);
-  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     fetchCarouselData();
@@ -39,9 +38,10 @@ const EditCarouselImages = (props) => {
     }
   };
 
+
   if (err) {
     return <ErrorScreen error={err} />
-  }
+}
   else if (!isLoaded) {
     return <LoadingScreen />
   }
@@ -64,14 +64,29 @@ const EditCarouselImages = (props) => {
                     tag={Link} to="/editdashboard"
                     small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Dashboard
                   </Button>
-                </div>
+                  </div>
                 {/* <div style={{ display: 'flex' }}> */}
               </div>
             </Col>
           </Row>
           <Row>
             {carouselData.map((carousel, index) => {
-              return <Col key={index} xs="12" sm="6">{carousel.dt_url}</Col>
+              console.log(carousel)
+              return (
+                <Fragment>
+                  <Col xs={12} sm={4} lg={4}>
+                <Card style={{ borderColor: 'rgba(250, 146, 164, .2)', margin: 10 }}>
+                <CardTitle tag="h3">Desktop Image Slide</CardTitle>
+                <CardImg top width="100%" src={carousel.dt_url} alt="Card image cap" />
+                <CardTitle tag="h3">Mobile Image Slide</CardTitle>
+                <CardImg top width="100%" src={carousel.mb_url} alt="Card image cap" />
+                <CardBody>
+                  <EditCarouselsModal id={carousel.id} desktopURL={carousel.dt_url} mobileURL={carousel.mb_url} />
+                </CardBody>
+              </Card>
+              </Col>
+              </Fragment>
+              )
             })
             }
             {/* <Col xs="12" sm="6">
@@ -84,7 +99,6 @@ const EditCarouselImages = (props) => {
             </Col> */}
           </Row>
         </div>
-
       </Fragment>
     );
   }

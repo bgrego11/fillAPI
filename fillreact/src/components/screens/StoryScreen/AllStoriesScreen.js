@@ -1,52 +1,58 @@
-
-
-
-import React, { useEffect, useState, useParams } from 'react';
+/* eslint-disable array-callback-return */
+import React, { useEffect, useState } from 'react';
 import {
-  Row, Col, Button, ListGroup, ListGroupItem, Container
+  Row, Col, Button, ListGroup, ListGroupItem, Container,
+  Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
 } from 'reactstrap';
 
 // Components
-import NewStoryModal from './NewStoryModal'
 import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
 import { Link } from 'react-router-dom';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import ErrorScreen from '../../error/ErrorScreen';
-import { filter } from 'lodash';
 
 
 
 const SeriesStoriesScreen = (props) => {
 
+  const [allStoryData, setAllStoryData] = useState([])
   const [storiesData, setStoriesData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [err, setErr] = useState(null);
-  const [newModal, setNewModal] = useState(false);
+  const [dropdownOpen, setDropDownOpen] = useState(false);
+  const [sortOptions, setSortOptions] = useState([]);
+  const [allStoryTags, setAllStoryTags] = useState([]);
 
-  const newModaltoggle = () => {
-    setNewModal(!newModal);
+
+  // toggle our drop down filters open/close state
+  const toggle = () => {
+    setDropDownOpen(!dropdownOpen);
   }
 
   // We need to filter sotries by their respective paramter 
   // In order to do this we will take a key from the tag and update our array
   const filterStories = (sortParams) => {
     const matchingStoryTags = []
-    const sortFake = ['love', "inspirational", "monotheism"]
-    const newStoryArray = []
+    let newStoryArray = []
+    if (sortParams.length < 1) {
+      setStoriesData(allStoryData)
+      return
+    }
 
-    storiesData.map((story) => {
+    allStoryData.map((story) => {
       story.st_tags.map((filterTag) => {
-        sortFake.map((filterName) => {
-          if (filterTag.tag === filterName) {
-            if (matchingStoryTags.indexOf(filterTag.story_id)) {
+
+        sortParams.map((filterName) => {
+          if (filterTag.tag.toLowerCase() === filterName) {
+            if (matchingStoryTags.indexOf(filterTag.story_id) === -1) {
               matchingStoryTags.push(filterTag.story_id)
             }
           }
         })
       })
     })
-    console.log(matchingStoryTags)
-    storiesData.map((getIT) => {
+  
+    allStoryData.map((getIT) => {
       matchingStoryTags.map((story) => {
         if (story === getIT.id) {
           newStoryArray.push(getIT)
@@ -54,9 +60,21 @@ const SeriesStoriesScreen = (props) => {
       })
     })
 
-    console.log(newStoryArray)
     setStoriesData(newStoryArray)
 
+  }
+
+  const toggleSortOption = (sortParam) => {
+    let newOptions = sortOptions
+    if (sortOptions.indexOf(sortParam) === -1) {
+      newOptions.push(sortParam)
+      setSortOptions(newOptions)
+    } else {
+      newOptions = sortOptions.filter((option) => option !== sortParam)
+      setSortOptions(newOptions)
+    }
+    filterStories(newOptions)
+    console.log('newIotions',newOptions)
   }
 
   const fetchStoryData = async () => {
@@ -67,8 +85,22 @@ const SeriesStoriesScreen = (props) => {
       }
       );
       let rawStoriesData = await res.json();
+      let storyTagArray = []
+
       console.log(rawStoriesData)
+      setAllStoryData(rawStoriesData);
       setStoriesData(rawStoriesData);
+
+      // set our story tag options for dropdown
+      rawStoriesData.map((story) => {
+        story.st_tags.map((tagItem) => {
+          const tag = tagItem.tag.toLowerCase()
+          if (storyTagArray.indexOf(tag) === -1) {
+            storyTagArray.push(tag);
+          }
+        })
+      })
+      setAllStoryTags(storyTagArray)
       setIsLoaded(true);
     }
     catch (error) {
@@ -76,6 +108,11 @@ const SeriesStoriesScreen = (props) => {
       setIsLoaded(true);
     }
   };
+
+  const clearSortParams = () => {
+    setSortOptions([])
+    filterStories([])
+  }
 
   useEffect(() => {
     fetchStoryData();
@@ -102,7 +139,6 @@ const SeriesStoriesScreen = (props) => {
                   tag={Link} to="/"
                   small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Home
                 </Button>
-                <Button onClick={filterStories}>Filter</Button>
               </div>
               {/* <div style={{ display: 'flex' }}> */}
               {/* <div> */}
@@ -117,6 +153,27 @@ const SeriesStoriesScreen = (props) => {
                   </Button> */}
               {/* <NewStoryModal isOpen={newModal} toggle={newModaltoggle} /> */}
               {/* </div> */}
+
+            <Dropdown isOpen={dropdownOpen} toggle={() => toggle()}>
+              <DropdownToggle color="primary" caret>
+                Filter by story type
+              </DropdownToggle>
+              <DropdownMenu>
+                {
+                  allStoryTags && allStoryTags.map((option) => {
+
+                    if (sortOptions.indexOf(option) !== -1) {
+                      return <DropdownItem onClick={() => toggleSortOption(option)}>&#10004; {option}</DropdownItem>
+                    } else {
+                      return (
+                        <DropdownItem onClick={() => toggleSortOption(option)}>{option}</DropdownItem>
+                      )
+                    }
+                  })
+                }
+                <DropdownItem onClick={() => clearSortParams()}>Clear Filters</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
             </div>
           </Col>
         </Row>

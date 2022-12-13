@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import ARROW_LEFT_FEATHER_SVG from '../../../assets/svg/ARROW_LEFT_FEATHER_SVG';
+import PLUS_ADD_FEATHER_SVG from '../../../assets/svg/PLUS_ADD_FEATHER_SVG';
+import { Link } from 'react-router-dom';
 import {
   Row, Col, Card, CardBody,
   CardTitle, Button, Spinner
@@ -71,14 +74,28 @@ const EditStoryScreen = () => {
     fetchStoryData();
   }, [seriesID, sectionData]);
 
-
-  const handleScreen = () => {
-    window.location = '/editDashboard'
-  }
-
   return (
     <div className="seriesContainer">
-      <Button onClick={handleScreen}>Back to Series</Button>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Button
+          style={{
+            display: 'inline-flex', alignItems: 'center'
+          }}
+          tag={Link} to="/editdashboard"
+          small outline className="the-fill-app-button" > <ARROW_LEFT_FEATHER_SVG size='20' color='rgb(250, 146, 164)' />Dashboard
+        </Button>
+        <div>
+        <Button
+        style={{
+          display: 'inline-flex', alignItems: 'center'
+        }}
+        small outline className="the-fill-app-button"
+        onClick={newModaltoggle}
+      > <PLUS_ADD_FEATHER_SVG
+          size='20' color='rgb(250, 146, 164)' />Add New Story
+      </Button>
+      </div>
+      </div>
       {loading ?
         <div className="spinnerCenter">
           <Spinner type="grow" style={{ width: '5rem', height: '5rem', color: "#f092a4" }} />
@@ -90,14 +107,6 @@ const EditStoryScreen = () => {
               return <Col key={index} xs="12" sm="4"><StoryCard sectionData={sectionData && sectionData} storyTagData={storyTagData} cardData={story} /></Col>
             })
             }
-            <Col xs="12" sm="4">
-              <Card>
-                <CardBody>
-                  <CardTitle tag="h3">Add New Story</CardTitle>
-                  <Button onClick={newModaltoggle}>Click to Add</Button>
-                </CardBody>
-              </Card>
-            </Col>
           </Row>
           <NewStoryModal isOpen={newModal} seriesID={seriesID} toggle={newModaltoggle} />
         </div>

@@ -47,6 +47,7 @@ const EditSeriesModal = (props) => {
           const error = (data && data.message) || response.status;
           return Promise.reject(error);    
       }
+      window.location.reload()
       
   })
   .catch(error => {
