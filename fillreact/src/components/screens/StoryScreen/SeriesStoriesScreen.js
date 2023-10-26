@@ -30,7 +30,7 @@ const SeriesStoriesScreen = (props) => {
   useEffect(() => {
     const fetchStoryData = async () => {
       try {
-        let res = await fetch(`https://thefill.herokuapp.com/api/series/${seriesID}`, {
+        let res = await fetch(`http://localhost:8080/api/series/${seriesID}`, {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Access-Control-Allow-Origin': 'http://localhost:3000',
