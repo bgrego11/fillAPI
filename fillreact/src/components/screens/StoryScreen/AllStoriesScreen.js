@@ -79,7 +79,7 @@ const SeriesStoriesScreen = (props) => {
 
   const fetchStoryData = async () => {
     try {
-      let res = await fetch(`https://thefill.herokuapp.com/api/story/`, {
+      let res = await fetch(`http://localhost:8080/api/story/`, {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       }

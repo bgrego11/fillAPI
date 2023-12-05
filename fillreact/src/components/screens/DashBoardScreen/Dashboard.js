@@ -27,7 +27,7 @@ const DashboardSeriesScreen = ({ toggleScreen }) => {
 
   const fetchSeriesData = async () => {
     try {
-      let res = await fetch('https://thefill.herokuapp.com/api/series', {
+      let res = await fetch('http://localhost:8080/api/series', {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:3000',

@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 // const sequelize = new Sequelize('mysql://ben:hotdogboy79@thefill.c4dakz7il1rp.us-east-2.rds.amazonaws.com:3306/thefilldb');
 
-const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
+const sequelize = new Sequelize('mysql://fmeb96hg9t60ns21:c0ld6b5cyp4tynt9@frwahxxknm9kwy6c.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ldaili7sc7z49reo');
 
 // const sequelize = new Sequelize('mysql://root:null@localhost:3306/thefilldb');
 
