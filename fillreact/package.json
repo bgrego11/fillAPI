@@ -10,16 +10,16 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.6.0",
-    "lodash": "^4.17.21",
     "formik": "^2.2.9",
-    "node-sass": "^6.0.1",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-background-slider": "^2.0.0",
     "react-dom": "^17.0.2",
     "react-player": "^2.9.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "5.0.1",
     "reactstrap": "^8.9.0",
+    "sass": "^1.77.8",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
   },
@@ -40,14 +40,6 @@
       ">0.2%",
       "not dead",
       "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
-  },
-  "resolutions": {
-    "caniuse-lite": "1.0.30001632"
   }
 }
