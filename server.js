@@ -9,7 +9,7 @@ const app = express();
 const db = require("./app/models");
 db.sequelize.sync();
 
-const whitelist = ['http://localhost:8080', 'https://thefill.herokuapp.com', 'https://thefill.org']
+const whitelist = ['http://localhost:8080', 'https://thefill.herokuapp.com', 'https://thefill.org', 'https://thefill-a0a9ae5e53ce.herokuapp.com/']
 const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
