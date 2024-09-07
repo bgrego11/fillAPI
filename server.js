@@ -43,7 +43,12 @@ require("./app/routes/section.routes")(app);
 require("./app/routes/userprogress.routes")(app);
 require("./app/routes/stripe.routes")(app);
 
-app.get('*', (req, res) => {                       
+app.get('/mydotenv', (req, res) => {
+  res.send({'process env': process.env})
+});
+
+
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/fillreact/build', 'index.html'));                               
 });
 
