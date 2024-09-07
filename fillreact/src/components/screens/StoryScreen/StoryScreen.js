@@ -26,7 +26,7 @@ const StoryScreen = (props) => {
 
   const fetchSectionData = async () => {
     try {
-      let res = await fetch(`http://localhost:8080/api/section`, {
+      let res = await fetch(`/api/section`, {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       }
