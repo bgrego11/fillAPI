@@ -36,7 +36,7 @@ const NewSeriesModal = (props) => {
         "likes": 0
        })
   };
-  fetch('https://thefill.herokuapp.com/api/series', requestOptions)
+  fetch('/api/series', requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);

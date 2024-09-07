@@ -26,7 +26,7 @@ const EditStoryScreen = () => {
   }
 
   const fetchStoryTagData = async () => {
-    let res = await fetch(`https://thefill.herokuapp.com/api/storytag`, {
+    let res = await fetch(`/api/storytag`, {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     }
@@ -41,7 +41,7 @@ const EditStoryScreen = () => {
   }, []);
 
   const fetchSectionData = async () => {
-    let res = await fetch(`https://thefill.herokuapp.com/api/section`, {
+    let res = await fetch(`/api/section`, {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     }
@@ -59,7 +59,7 @@ const EditStoryScreen = () => {
   useEffect(() => {
     const fetchStoryData = async () => {
       try {
-        let res = await fetch(`https://thefill.herokuapp.com/api/series/${seriesID}`, {
+        let res = await fetch(`/api/series/${seriesID}`, {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         }

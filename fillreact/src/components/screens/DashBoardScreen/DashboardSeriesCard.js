@@ -26,7 +26,7 @@ const DashboardSeriesCard = (props) => {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     };
-    fetch(`https://thefill.herokuapp.com/api/series/${props.seriesData.id}`, requestOptions)
+    fetch(`/api/series/${props.seriesData.id}`, requestOptions)
       .then(async response => {
         const data = await response.json();
         // check for error response

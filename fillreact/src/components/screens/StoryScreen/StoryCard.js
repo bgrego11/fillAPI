@@ -20,7 +20,7 @@ const StoryCard = ({ cardData, storyTagData }) => {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     };
-    fetch(`https://thefill.herokuapp.com/api/story/${cardData.id}`, requestOptions)
+    fetch(`/api/story/${cardData.id}`, requestOptions)
       .then(async response => {
         const data = await response.json();
         if (!response.ok) {

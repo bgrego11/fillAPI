@@ -82,7 +82,7 @@ const EditStoryModal = (props) => {
        })
   };
   try {
-  const response = await fetch('https://thefill.herokuapp.com/api/storytag', requestOptions)
+  const response = await fetch('/api/storytag', requestOptions)
 
       const data = await response.json();
       console.log(data);
@@ -104,7 +104,7 @@ const EditStoryModal = (props) => {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
   };
-  fetch(`https://thefill.herokuapp.com/api/storytag/${tagId}`, requestOptions)
+  fetch(`/api/storytag/${tagId}`, requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);
@@ -141,7 +141,7 @@ const EditStoryModal = (props) => {
        })
   };
   try {
-  const response = await fetch('https://thefill.herokuapp.com/api/section', requestOptions)
+  const response = await fetch('/api/section', requestOptions)
 
       const data = await response.json();
       setSectionData([...sectionData, data])
@@ -176,7 +176,7 @@ const EditStoryModal = (props) => {
         url: audioURL,
        })
   };
-  fetch(`https://thefill.herokuapp.com/api/story/${props.id}`, requestOptions)
+  fetch(`/api/story/${props.id}`, requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);
@@ -207,7 +207,7 @@ const handleEditSection = (sectionId) => {
       "text": editSectionText,
      })
 };
-fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
+fetch(`/api/section/${sectionId}`, requestOptions)
 .then(async response => {
     const data = await response.json();
     console.log(data);
@@ -232,7 +232,7 @@ const handleDeleteSection = (sectionId) => {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
 };
-fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
+fetch(`/api/section/${sectionId}`, requestOptions)
 .then(async response => {
     const data = await response.json();
     console.log(data);
@@ -271,7 +271,7 @@ fetch(`https://thefill.herokuapp.com/api/section/${sectionId}`, requestOptions)
       }, [props.id, props.storyTagData])
 
     const fetchSectionData = async () => {
-      let res = await fetch(`https://thefill.herokuapp.com/api/story/${props.id}`, {
+      let res = await fetch(`/api/story/${props.id}`, {
           'Content-Type':'application/json',
           'Accept': 'application/json',
       }

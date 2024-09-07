@@ -1,4 +1,4 @@
 "id";"dt_url";"dt_route_name";"mb_url";"mb_route_name";"createdAt";"updatedAt"
-2;"https://thefill.herokuapp.com/slider1.jpg";"thefill.org";"https://thefill.org/wp-content/uploads/2021/01/Mission_image1.png";"thefill.org";"2021-10-17 03:37:02";"2021-11-09 03:54:51"
-3;"https://thefill.herokuapp.com/slider2.jpg";"thefill.org";"https://thefill.org/wp-content/uploads/2021/01/fill_up_posts_2.png";"thefill.org";"2021-11-07 16:25:31";"2021-11-09 03:59:32"
-4;"https://thefill.herokuapp.com/slider4.jpg";"thefill.org";"https://thefill.org/wp-content/uploads/2021/01/Meditations_3.png";"thefill.org";"2021-11-09 01:36:35";"2021-11-09 03:59:59"
+2;"/slider1.jpg";"thefill.org";"https://thefill.org/wp-content/uploads/2021/01/Mission_image1.png";"thefill.org";"2021-10-17 03:37:02";"2021-11-09 03:54:51"
+3;"/slider2.jpg";"thefill.org";"https://thefill.org/wp-content/uploads/2021/01/fill_up_posts_2.png";"thefill.org";"2021-11-07 16:25:31";"2021-11-09 03:59:32"
+4;"/slider4.jpg";"thefill.org";"https://thefill.org/wp-content/uploads/2021/01/Meditations_3.png";"thefill.org";"2021-11-09 01:36:35";"2021-11-09 03:59:59"

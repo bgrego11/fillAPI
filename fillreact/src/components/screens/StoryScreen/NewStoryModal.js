@@ -48,7 +48,7 @@ const NewStoryModal = (props) => {
         series_id: props.seriesID,
        })
   };
-  fetch('https://thefill.herokuapp.com/api/story', requestOptions)
+  fetch('/api/story', requestOptions)
   .then(async response => {
       const data = await response.json();
       props.toggle();

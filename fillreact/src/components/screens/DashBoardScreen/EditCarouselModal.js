@@ -33,7 +33,7 @@ const EditCarouselsModal = (props) => {
         "mb_route_name": "thefill.org"
        })
   };
-  fetch(`https://thefill.herokuapp.com/api/carousel/${props.id}`, requestOptions)
+  fetch(`/api/carousel/${props.id}`, requestOptions)
   .then(async response => {
       const data = await response.json();
       console.log(data);

@@ -23,7 +23,7 @@ const EditCarouselImages = (props) => {
 
   const fetchCarouselData = async () => {
     try {
-      let res = await fetch('https://thefill.herokuapp.com/api/carousel', {
+      let res = await fetch('/api/carousel', {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': 'http://localhost:3000',
